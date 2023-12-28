@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 //TODO: Add props that will translate from a JSON file
 //TODO: Props should include course title
 //TODO: Props should include course description
-//TODO: Props should include relative URL to course details page
+//TODO: Props should include relative URL to course details page that links to course id
 //TODO: Build corresponding backend structure to export
 
 function CourseCard() {

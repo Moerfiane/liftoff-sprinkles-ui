@@ -9,22 +9,12 @@ import {
   Form,Navbar, Nav
 } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import Navigation from "./Navbar";
 
 export default function Register() {
   return (
     <>
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="/admin">Admin</Nav.Link>
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navigation />
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
