@@ -12,7 +12,8 @@ export default function Navigation() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Link to="/create-course">Create a Course</Link>
+            <Nav.Link><Link to="/create-course">Create a Course</Link></Nav.Link>
+            <Nav.Link><Link to="/view-all-courses">View All Courses</Link></Nav.Link>
             
           </Nav>
         </Navbar.Collapse>
