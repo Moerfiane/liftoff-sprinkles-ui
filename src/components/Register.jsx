@@ -18,7 +18,6 @@ export default function Register() {
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
-          <div className="border border-3 border-primary"></div>
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-4">
