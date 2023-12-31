@@ -2,9 +2,56 @@ import Navigation from './Navbar';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 
 //TODO: If add module button is clicked append new module component with incremental numbers
+//TODO: Pre-populate tools / ingredients similar to skills in techjobspersistent
+    //TODO: auto-populate tags box -- look up this code
+//TODO: "Add step" button similar to add module -- do this for tools and ingredients too?
 //TODO: Add image select
 //TODO: Add handle submit
 //TODO: Hook up to backend
+//TODO: Consider prep-populating modules so that they can be interchangeable - stretch goal
+
+const Module = () => {
+    return (
+        <>
+            <Form.Group className="mb-1 mt-4" controlId="formCourseTitle">
+                <Form.Label className="text-center">
+                    Module Title
+                </Form.Label>
+                <Form.Control type="text" placeholder="Enter a course title" />
+            </Form.Group>
+            <Form.Group className="mb-1 mt-4" controlId="formModuleDescription">
+                <Form.Label className="text-center">
+                    Module Description
+                </Form.Label>
+                <Form.Control as="textarea" placeholder="Enter a description"></Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-1 mt-4" controlId="formModuleTools">
+                <Form.Label className="text-center">
+                    Module Tools
+                </Form.Label>
+                <Form.Control as="textarea" placeholder="Enter a list of tools"></Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-1 mt-4" controlId="formModuleIngredients">
+                <Form.Label className="text-center">
+                    Module Ingredients
+                </Form.Label>
+                <Form.Control as="textarea" placeholder="Enter a list of Ingredients"></Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-1 mt-4" controlId="formModuleNotes">
+                <Form.Label className="text-center">
+                    Module Notes
+                </Form.Label>
+                <Form.Control as="textarea" placeholder="Enter any notes relevant to the recipe"></Form.Control>
+            </Form.Group>
+            <Form.Group className="mb-1 mt-4" controlId="formModuleSteps">
+                <Form.Label className="text-center">
+                    Module Steps
+                </Form.Label>
+                <Form.Control as="textarea" placeholder="Enter the steps of the recipe"></Form.Control>
+            </Form.Group>
+        </>
+    )
+}
 
 
 export default function CreateCourse() {
@@ -42,7 +89,9 @@ export default function CreateCourse() {
                                         <option value="2">Advanced</option>
                                     </Form.Select>
                                 </Form.Group>
-                                <div className="d-grid">
+                                {/* add a Module here with an iterated key or Id */}
+                                <Button variant ="primary" type="submit">Add a Module</Button>
+                                <div className="d-grid mt-5">
                                     <Button variant="primary" type="submit">Submit</Button>
                                 </div>
                             </Form>
