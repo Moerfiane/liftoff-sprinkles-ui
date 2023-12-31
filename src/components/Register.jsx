@@ -11,6 +11,9 @@ import {
 import { Link } from 'react-router-dom';
 import Navigation from "./Navbar";
 
+//TODO: Add e-mail field
+//TODO: Add e-mail confirmation logic
+
 export default function Register() {
   return (
     <>
