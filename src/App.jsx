@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import './App.css';
 //import CreateAccountForm from './components/CreateAccountForm';
@@ -8,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import Container  from 'react-bootstrap/Container';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>
@@ -23,4 +26,4 @@ function App() {
 }
 
 
-export default App
+export default App;
