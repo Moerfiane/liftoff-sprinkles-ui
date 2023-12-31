@@ -36,6 +36,7 @@ function App() {
         <Route path="/courses/create" element={<CreateCourse />} />
         <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
+        <Route path="/my-account" element={<MyAccount />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>
