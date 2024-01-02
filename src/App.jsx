@@ -11,6 +11,7 @@ import Register from './components/Register';
 import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
+import UserDetails from './components/UserAccountPage';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
