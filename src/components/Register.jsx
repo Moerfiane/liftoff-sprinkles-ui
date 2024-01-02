@@ -1,4 +1,5 @@
 import React from "react";
+import {  useState } from "react";
 import {
   InputGroup,
   Col,
@@ -8,10 +9,46 @@ import {
   Card,
   Form,Navbar, Nav
 } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 import Navigation from "./Navbar";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Register() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [verifyPassword, setVerifyPassword] = useState('');
+  const navigate = useNavigate();
+  const handleRegister = async (event) => {
+    event.preventDefault(); 
+    if (password !== verifyPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:8080/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, verifyPassword }),
+      });
+
+      const data = await response.json();
+
+      
+      if (data.success) {
+        navigate('/'); 
+      } else {
+        alert(data.message); 
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('An error occurred during registration');
+    }
+  };
+
+
   return (
     <>
     <Navigation />
@@ -29,18 +66,20 @@ export default function Register() {
                     <Form.Label className="text-center">
                       User name
                     </Form.Label>
-                    <Form.Control type="text" placeholder="Enter name" />
+                    <Form.Control type="text" placeholder="Enter name" value={username} onChange={(e) => setUsername(e.target.value)}/>
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" value={password}
+                      onChange={(e) => setPassword(e.target.value)} />
                   </Form.Group>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Verify Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="verifyPassword" value={verifyPassword}
+                      onChange={(e) => setVerifyPassword(e.target.value)}/>
                   </Form.Group>
                   <div className="d-grid">
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={handleRegister} >
                     Register
                     </Button>
                   </div>
