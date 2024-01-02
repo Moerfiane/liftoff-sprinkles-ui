@@ -26,3 +26,8 @@ dist-ssr
 # Basic Components
 src/components/HorizontalFormExample.jsx
 src/components/ListGroupExample.jsx
+
+# Reference Code
+src/utilities/dataFetcher.js
+src/utilities/jsonProcessor.js
+src/utilities/uiController.js
