@@ -32,8 +32,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/create-course" element={<CreateCourse />} />
-        <Route path="/view-all-courses" element={<ViewCourses />} />
+        <Route path="/courses/create" element={<CreateCourse />} />
+        <Route path="/courses" element={<ViewCourses />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>

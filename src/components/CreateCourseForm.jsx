@@ -1,5 +1,7 @@
 import Navigation from './Navbar';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { sendCourseData } from '../utilities/sendData';
 
 //TODO: If add module button is clicked append new module component with incremental numbers
 //TODO: Pre-populate tools / ingredients similar to skills in techjobspersistent
@@ -54,7 +56,32 @@ const Module = () => {
 }
 
 
+
+
 export default function CreateCourse() {
+    const [courseData, setCourseData] = useState({
+        title:'',
+        description:'',
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCourseData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await sendCourseData(courseData);
+            console.log('Front end confirmation');
+        } catch (error) {
+            console.error('Error submitting data:', error);
+        }
+    };
+    
   return (
     <>
         <Navigation />
@@ -65,7 +92,7 @@ export default function CreateCourse() {
                         <Card.Body>
                         <div className="mb-3 mt-4">
                             <h2 className="fw-bold mb-5 text-uppercase">Create a course</h2>
-                            <Form className="mb-3">
+                            <Form className="mb-3" onSubmit={handleSubmit}>
                                 <Form.Group className="mb-1 mt-4" controlId="formCourseTitle">
                                     <Form.Label className="text-center">
                                         Course Title
@@ -78,7 +105,7 @@ export default function CreateCourse() {
                                     </Form.Label>
                                     <Form.Control as="textarea" placeholder="Enter a description"></Form.Control>
                                 </Form.Group>
-                                <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
+                                {/* <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
                                     <Form.Label className="text-center">
                                         Course Difficulty
                                     </Form.Label>
@@ -89,8 +116,8 @@ export default function CreateCourse() {
                                         <option value="2">Advanced</option>
                                     </Form.Select>
                                 </Form.Group>
-                                {/* add a Module here with an iterated key or Id */}
-                                <Button variant ="primary" type="submit">Add a Module</Button>
+                                // add a Module here with an iterated key or Id */}
+                                {/* <Button variant ="primary" type="submit">Add a Module</Button>  */}
                                 <div className="d-grid mt-5">
                                     <Button variant="primary" type="submit">Submit</Button>
                                 </div>
@@ -101,7 +128,6 @@ export default function CreateCourse() {
                 </Col>
             </Row>
         </Container>
-
     </>
   );
 }
