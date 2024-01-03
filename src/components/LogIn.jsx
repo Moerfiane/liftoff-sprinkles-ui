@@ -1,9 +1,33 @@
 import React from "react";
+import {  useState } from "react";
 import { Col, Button, Row, Container, Card, Form, Navbar, Nav } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Navigation from "./Navbar";
 
 export default function LogIn() {
+  const [username, setUsername] =useState('');
+  const [password, setPassword] =useState('');
+  const navigate = useNavigate();
+  const login = async (event) => {
+    event.preventDefault(); 
+
+    try {
+      
+      const response = await axios.post('http://localhost:8080/login', { username, password });
+     
+      console.log('Response:', response);
+
+      if (response.data.success) {
+        navigate('/courses'); 
+      } else {
+        alert('Login failed: ' + response.data.message); 
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred during login');
+    }
+  };
   return (
     <>
     <Navigation />
@@ -16,16 +40,18 @@ export default function LogIn() {
                 <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                 <p className=" mb-5">Please enter your login and password!</p>
                 <Form className="mb-3">
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label className="text-center">
-                      Email address
+                      Username
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control type="text" placeholder="Enter username" value={username}
+                        onChange={(e) => setUsername(e.target.value)}/>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
+                    <Form.Control type="password" placeholder="Password" value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
                   </Form.Group>
                   <div className="mb-3">
                     <p className="small">
@@ -35,7 +61,7 @@ export default function LogIn() {
                     </p>
                   </div>
                   <div className="d-grid">
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick={login} >
                       Login
                     </Button>
                   </div>
