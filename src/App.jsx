@@ -10,6 +10,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
+import CreateCourse from './components/CreateCourseForm';
+import ViewCourses from './components/ViewAllCourses';
+
+//Done: Build CourseCard component
+//Done: Build Menu component
+//Done: Build Sign up component
+//Done: Build Login component
+//TODO: Build Hero component
+//TODO: Write about content
+//TODO: Build Account Management screen
+//TODO: Build CoursePage screen
+//TODO: Build CourseCompletion screen
+//TODO: Build Search screen
+//In progress: Build AddCourse screen
+//Done: Set routes using react-router Set useState variables to refresh page based on menu items clicked
+
 
 
 function App() {

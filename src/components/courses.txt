@@ -1,0 +1,34 @@
+course_id: {
+    course_title: "a title";
+    course_description: "a longer description";
+    course_image: "a path to an image url";
+    course_difficulty: "an option from three of beginner, intermediate, or advanced";
+    course_modules: {
+        module_1: {
+            module_title: "a title for the module";
+            module_isCompleted: "a boolean indicating whether the user has completed the module or not";
+            module_description: "a one-sentence description of the module";
+            module_tools: {
+                1: "first tool";
+                2: "second tool";
+                };
+            module_ingredients: {
+                1: "first ingredient";
+                2: "second igredient";
+                };
+            module_notes: "a paragraph or multiple objects of notes that will get added above the recipe instructions (e.g., egg types)";
+            module_steps: {
+                1: "step one in cooking";
+                2: "step two in cooking";
+            }
+        }
+    }
+    course_quiz: {
+        question_1:
+        answer_1:
+        question_2:
+        answer_2:
+        question_3:
+        answer_3:
+    }
+}
