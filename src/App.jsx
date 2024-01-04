@@ -11,6 +11,7 @@ import Register from './components/Register';
 import CreateCourse from './components/CreateCourseForm';
 import ViewCourses from './components/ViewAllCourses';
 import UserDetails from './components/UserAccountPage';
+import EditUserDetails from './components/EditPage';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -37,6 +38,7 @@ function App() {
         <Route path="/view-all-courses" element={<ViewCourses />} />
         <Route path="/my-account" element={<UserDetails />} />
         <Route path="/" element={<LogIn />} />
+        <Route path="edit-account" element={<EditUserDetails/>} />
       </Routes>
     </Router>
   );
