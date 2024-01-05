@@ -1,12 +1,13 @@
 //TODO: make this work for any path
 //NOTE: currently redirecting to login screen
-const sendCourseData = async (data) => {
+const sendData = async (data, url) => {
   
     try {
-      const response = await fetch('http://localhost:8080/courses/create', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'http://localhost:5173'
         },
         body: JSON.stringify(data),
       });
@@ -21,4 +22,4 @@ const sendCourseData = async (data) => {
     }
   };
   
-  export {sendCourseData};
+  export {sendData};

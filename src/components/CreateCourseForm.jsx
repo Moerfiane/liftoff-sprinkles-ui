@@ -1,7 +1,9 @@
 import Navigation from './Navbar';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { sendCourseData } from '../utilities/sendData';
+import { sendData } from '../utilities/sendData';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 //TODO: Make match Sukanya's
 //TODO: If add module button is clicked append new module component with incremental numbers
@@ -60,11 +62,15 @@ const Module = () => {
 
 
 export default function CreateCourse() {
-    const [courseData, setCourseData] = useState({
-        title:'',
-        description:'',
-    });
+    //TODO: If protected, add logic to make backend request to do authentication check
+    //TODO: Research react-router to see if you can have it do that check before loading
 
+    const [courseData, setCourseData] = useState({
+        courseTitle:'',
+        courseDescription:'',
+        courseDifficulty:''
+    });
+    const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCourseData((prevData) => ({
@@ -74,12 +80,28 @@ export default function CreateCourse() {
       };
 
       const handleSubmit = async (e) => {
-        e.preventDefault();
+        event.preventDefault(); 
+
         try {
-            await sendCourseData(courseData);
-            console.log('Front end confirmation');
+          console.log(courseData);
+          const response = await fetch('http://localhost:8080/courses/create', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(courseData),
+           });
+         
+          const data = await response.json();
+    
+          if (data.success) {
+            navigate('/courses'); 
+          } else {
+            alert('Course creation failed: ' + data.message); 
+          }
         } catch (error) {
-            console.error('Error submitting data:', error);
+          console.error('Login error:', error);
+          alert('An error occurred during course creation');
         }
     };
     
@@ -98,27 +120,25 @@ export default function CreateCourse() {
                                     <Form.Label className="text-center">
                                         Course Title
                                     </Form.Label>
-                                    <Form.Control type="text" placeholder="Enter a course title" />
+                                    <Form.Control type="text" placeholder="Enter a course title" name="courseTitle" onChange={handleChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-1 mt-4" controlId="formCourseDescription">
                                     <Form.Label className="text-center">
                                         Course Description
                                     </Form.Label>
-                                    <Form.Control as="textarea" placeholder="Enter a description"></Form.Control>
+                                    <Form.Control as="textarea" placeholder="Enter a description" name="courseDescription" onChange={handleChange}></Form.Control>
                                 </Form.Group>
-                                {/* <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
+                                <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
                                     <Form.Label className="text-center">
                                         Course Difficulty
                                     </Form.Label>
-                                    <Form.Select>
+                                    <Form.Select name="courseDifficulty" onChange={handleChange}>
                                         <option>Select a difficulty</option>
-                                        <option value="0">Beginner</option>
-                                        <option value="1">Intermediate</option>
-                                        <option value="2">Advanced</option>
+                                        <option value="1">Beginner</option>
+                                        <option value="2">Intermediate</option>
+                                        <option value="3">Advanced</option>
                                     </Form.Select>
                                 </Form.Group>
-                                // add a Module here with an iterated key or Id */}
-                                {/* <Button variant ="primary" type="submit">Add a Module</Button>  */}
                                 <div className="d-grid mt-5">
                                     <Button variant="primary" type="submit">Submit</Button>
                                 </div>
