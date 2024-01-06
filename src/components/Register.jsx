@@ -9,9 +9,8 @@ import {
   Card,
   Form,Navbar, Nav
 } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 import Navigation from "./Navbar";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Register() {
