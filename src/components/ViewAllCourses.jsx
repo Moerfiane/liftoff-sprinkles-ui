@@ -24,18 +24,16 @@ const ViewCourses = () => {
 
   const handleEnrollment = async (courseId) => {
     try {
-      const response = await fetch('/api/enroll', {
+      const response = await fetch('http://localhost:8080/enroll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Include authorization headers if required
         },
         body: JSON.stringify({ courseId }),
       });
 
       if (response.ok) {
         setFeedback({ message: 'Enrollment successful!', type: 'success' });
-        // Optionally update the course list or user state here
       } else {
         throw new Error('Enrollment failed');
       }
