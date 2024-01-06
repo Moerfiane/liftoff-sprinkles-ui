@@ -14,37 +14,37 @@ const ModuleForm = ({handleChange, handleClick}) => {
                 <Form.Label className="text-center">
                     Module Title
                 </Form.Label>
-                <Form.Control type="text" name="moduleTitle" placeholder="Enter a course title" />
+                <Form.Control type="text" name="name" placeholder="Enter a course title" />
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleDescription">
                 <Form.Label className="text-center">
                     Module Description
                 </Form.Label>
-                <Form.Control as="textarea" name="moduleDescription" placeholder="Enter a description" onChange={handleChange}></Form.Control>
+                <Form.Control as="textarea" name="description" placeholder="Enter a description" onChange={handleChange}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleTools">
                 <Form.Label className="text-center">
                     Module Tools
                 </Form.Label>
-                <Form.Control as="textarea" name="moduleTools" placeholder="Enter a list of tools" onChange={handleChange}></Form.Control>
+                <Form.Control as="textarea" name="tools" placeholder="Enter a list of tools" onChange={handleChange}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleIngredients">
                 <Form.Label className="text-center">
                     Module Ingredients
                 </Form.Label>
-                <Form.Control as="textarea" name="moduleIngredients" placeholder="Enter a list of Ingredients" onChange={handleChange}></Form.Control>
+                <Form.Control as="textarea" name="ingredients" placeholder="Enter a list of Ingredients" onChange={handleChange}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleNotes">
                 <Form.Label className="text-center">
                     Module Notes
                 </Form.Label>
-                <Form.Control as="textarea" name="moduleNotes" placeholder="Enter any notes relevant to the recipe" onChange={handleChange}></Form.Control>
+                <Form.Control as="textarea" name="notes" placeholder="Enter any notes relevant to the recipe" onChange={handleChange}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleSteps">
                 <Form.Label className="text-center">
                     Module Steps
                 </Form.Label>
-                <Form.Control as="textarea" name="moduleSteps" placeholder="Enter the steps of the recipe" onChange={handleChange}></Form.Control>
+                <Form.Control as="textarea" name="steps" placeholder="Enter the steps of the recipe" onChange={handleChange}></Form.Control>
             </Form.Group>
             <div className="d-grid mt-5">
                 <Button variant="primary" type="submit" name="addModule" onClick={handleClick}>
@@ -55,18 +55,18 @@ const ModuleForm = ({handleChange, handleClick}) => {
     )
 }
 
-
+//TODO: Add category
 export default function CreateModule() {
     const location = useLocation();
     const response = location.state;
     const [moduleData, setModuleData] = useState({
         courseId: response,
-        moduleTitle:'',
-        moduleDescription:'',
-        moduleTools:'',
-        moduleIngredients:'',
-        moduleNotes:'',
-        moduleSteps:'',
+        name:'',
+        description:'',
+        tools:'',
+        ingredients:'',
+        notes:'',
+        steps:'',
     });
 
     const navigate = useNavigate();
@@ -90,7 +90,7 @@ export default function CreateModule() {
 
         console.log(moduleData);
 
-        // sendData('/courses/modules/create', 'POST', {'Content-Type': 'application/json'}, moduleData);
+        sendData('/courses/modules/create', 'POST', {'Content-Type': 'application/json'}, moduleData);
     };
 
 
