@@ -5,14 +5,20 @@ import { sendData } from '../utilities/sendData';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-//Done: Make match Sukanya's
-//TODO: If add module button is clicked append new module component with incremental numbers
+
 //TODO: Pre-populate tools / ingredients similar to skills in techjobspersistent
-    //TODO: auto-populate tags box -- look up this code
+//TODO: auto-populate tags box -- look up this code
 //TODO: "Add step" button similar to add module -- do this for tools and ingredients too?
 //TODO: Add image select
+//TODO: Do not accept null course data
+//TODO: If protected, add logic to make backend request to do authentication check
+//TODO: Research react-router to see if you can have it do authentication check before loading /create
 //Done: Add handle submit
 //Done: Hook up to backend
+//Done: Make match Sukanya's
+//Done: If next button is clicked append new module
+
+let mainCourseId;
 
 const ModuleForm = ({handleChange, handleClick}) => {
     return (
@@ -66,9 +72,7 @@ const ModuleForm = ({handleChange, handleClick}) => {
 
 
 export default function CreateCourse() {
-    //TODO: If protected, add logic to make backend request to do authentication check
-    //TODO: Research react-router to see if you can have it do that check before loading
-    //TODO: Does not accept null course data
+
     const [courseData, setCourseData] = useState({
         courseTitle:'',
         courseDescription:'',
@@ -84,8 +88,6 @@ export default function CreateCourse() {
     const navigate = useNavigate();
     //triggers display of new module form after course is submitted
     const [showModuleForm, setShowModuleForm] = useState(false);
-    //storage for course data as new modules are added
-    // const wholeCourseData = new Object;
     const handleChange = (e, formType) => {
         const { name, value } = e.target;
 
@@ -107,87 +109,48 @@ export default function CreateCourse() {
     const handleClick = async (e, formType) => {
         e.preventDefault(); 
 
-
-
     //TODO: set courseId to the object storing the relationships, wholeCourseId
-    //TODO: figure out submission
+    //Done: figure out submission
         if (e.target.name == "courseForm" || e.target.name == "addModule") {
             setShowModuleForm(true);
-            
         } else {
             navigate("/courses");
         }
-
         handleSubmit(e, formType);
     };
+
     //TODO: DRY this code even further
     const handleSubmit = async (e, formType) => {
-        
     /*
         ONCLICK LOGIC
         When a user click's the NEXT button on course, it should:
             1) DONE: setShowModule to true
-            2) send courseData to the backend
-            3) set courseId to what's returned from data response
+            2) DONE: courseData to the backend
+            3) DONE: set courseId to what's returned from data response
         When a user clicks the ADD MODULE button on module, it should:
             1) DONE: setShowModule to true
-            2) send moduleData to the backend
+            2) DONE: send moduleData to the backend
         When a user clicks the DONE button on moudle, it should:
             1) DONE:  navigate to /courses
-            2) send moduleData to the backend
+            2) DONE: send moduleData to the backend
     */
+        let path;
+        const method = 'POST';
+        const headers = {'Content-Type': 'application/json'};
+        let body;
 
         if (formType = "course") {
-            try {
-                console.log(courseData);
-                const response = await fetch('http://localhost:8080/courses/create', { 
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(courseData),
-                 });
-               
-                const data = await response.json();
-                console.log(data.courseId);
-          
-                if (data.success) {
-                  console.log(data.message);
-                } else {
-                  alert('Course creation failed: ' + data.message); 
-                }
-              } catch (error) {
-                console.error('Login error:', error);
-                alert('An error occurred during course creation');
-              }
+            path = "/courses/create";
+            body = courseData;
+            let response = await sendData(path, method, headers, body);
+            mainCourseId = response.courseId;
         } else if (formType="module") {
-            console.log(moduleData);
-
-            // sendData(path, method, headers, body);
-            try {
-                const response = await fetch('http://localhost:8080/courses/create', { 
-                  method: 'POST',
-                  headers: {
-                      'Content-Type': 'application/json',
-                  },
-                  body: JSON.stringify(courseData),
-                 });
-               
-                const data = await response.json();
-                console.log(data.courseId);
-          
-                if (data.success) {
-                  console.log(data.message);
-                } else {
-                  alert('Course creation failed: ' + data.message); 
-                }
-              } catch (error) {
-                console.error('Login error:', error);
-                alert('An error occurred during course creation');
-              }
+            path = "/courses/modules/create";
+            body = moduleData;
+            sendData(path, method, headers, body);
         }
-
-
+        
+        
     }
 
 

@@ -1,25 +1,25 @@
 //TODO: make this work for any path
-//NOTE: currently redirecting to login screen
-const sendData = async (data, url) => {
-  
+const sendData = async (path, method, headers, body) => {
+
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'http://localhost:5173'
-        },
-        body: JSON.stringify(data),
+      const response = await fetch(`http://localhost:8080${path}`, {
+        method: `${method}`,
+        headers: headers,
+        body: JSON.stringify(body),
       });
-  
-      if (response.ok) {
-        console.log('Data sent successfully');
+      
+      const data = await response.json();
+
+      if (data.success) {
+        console.log(data.message);
+        return data;
       } else {
-        console.error('Failed to send data');
+        console.error('Failed to send data' + data.message);
       }
     } catch (error) {
       console.error('Error sending data:', error);
     }
+    
   };
   
   export {sendData};
