@@ -5,19 +5,20 @@ import { sendData } from '../utilities/sendData';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
-//TODO: Make match Sukanya's
+//Done: Make match Sukanya's
 //TODO: If add module button is clicked append new module component with incremental numbers
 //TODO: Pre-populate tools / ingredients similar to skills in techjobspersistent
     //TODO: auto-populate tags box -- look up this code
 //TODO: "Add step" button similar to add module -- do this for tools and ingredients too?
 //TODO: Add image select
-//TODO: Add handle submit
-//TODO: Hook up to backend
-//TODO: Consider prep-populating modules so that they can be interchangeable - stretch goal
+//Done: Add handle submit
+//Done: Hook up to backend
 
-const Module = () => {
+const ModuleForm = ({handleChange, handleClick}) => {
     return (
         <>
+            <h2 className="fw-bold mb-1 text-uppercase">Add a Module</h2>
+            <h3 className="mb-5">Course Title</h3>
             <Form.Group className="mb-1 mt-4" controlId="formCourseTitle">
                 <Form.Label className="text-center">
                     Module Title
@@ -54,23 +55,30 @@ const Module = () => {
                 </Form.Label>
                 <Form.Control as="textarea" placeholder="Enter the steps of the recipe"></Form.Control>
             </Form.Group>
+            <div className="d-grid mt-5">
+                <Button variant="primary" type="submit" name="addModule" onClick={handleClick}>
+                    Add Module
+                </Button>
+            </div>
         </>
     )
 }
 
 
-
-
 export default function CreateCourse() {
     //TODO: If protected, add logic to make backend request to do authentication check
     //TODO: Research react-router to see if you can have it do that check before loading
-
+    //TODO: Does not accept null course data
     const [courseData, setCourseData] = useState({
         courseTitle:'',
         courseDescription:'',
         courseDifficulty:''
     });
     const navigate = useNavigate();
+    //triggers display of new module form after course is submitted
+    const [showModuleForm, setShowModuleForm] = useState(false);
+    //storage for course data as new modules are added
+    // const wholeCourseData = new Object;
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCourseData((prevData) => ({
@@ -78,9 +86,20 @@ export default function CreateCourse() {
           [name]: value,
         }));
       };
-
-      const handleSubmit = async (e) => {
+      
+      //TODO: DRY this code
+    const handleClick = async (e) => {
         event.preventDefault(); 
+
+    //checks what the button clicked is; if it's courseForm or addModule, it will display another addModule form, otherwise Navigate to courses
+    //Should this be targeted elsewhere and call handleSubmit(e)? 
+    //TODO: set courseId to the object storing the relationships, wholeCourseId
+    //TODO: figure out submission
+        if (e.target.name == "courseForm" || e.target.name == "addModule") {
+            setShowModuleForm(true);} 
+            else {
+                navigate("/courses");
+            }
 
         try {
           console.log(courseData);
@@ -93,9 +112,10 @@ export default function CreateCourse() {
            });
          
           const data = await response.json();
+          console.log(data.courseId);
     
           if (data.success) {
-            navigate('/courses'); 
+            console.log(data.message);
           } else {
             alert('Course creation failed: ' + data.message); 
           }
@@ -104,7 +124,10 @@ export default function CreateCourse() {
           alert('An error occurred during course creation');
         }
     };
-    
+
+
+
+
   return (
     <>
         <Navigation />
@@ -114,35 +137,10 @@ export default function CreateCourse() {
                     <Card>
                         <Card.Body>
                         <div className="mb-3 mt-4">
-                            <h2 className="fw-bold mb-5 text-uppercase">Create a course</h2>
-                            <Form className="mb-3" onSubmit={handleSubmit}>
-                                <Form.Group className="mb-1 mt-4" controlId="formCourseTitle">
-                                    <Form.Label className="text-center">
-                                        Course Title
-                                    </Form.Label>
-                                    <Form.Control type="text" placeholder="Enter a course title" name="courseTitle" onChange={handleChange} />
-                                </Form.Group>
-                                <Form.Group className="mb-1 mt-4" controlId="formCourseDescription">
-                                    <Form.Label className="text-center">
-                                        Course Description
-                                    </Form.Label>
-                                    <Form.Control as="textarea" placeholder="Enter a description" name="courseDescription" onChange={handleChange}></Form.Control>
-                                </Form.Group>
-                                <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
-                                    <Form.Label className="text-center">
-                                        Course Difficulty
-                                    </Form.Label>
-                                    <Form.Select name="courseDifficulty" onChange={handleChange}>
-                                        <option>Select a difficulty</option>
-                                        <option value="1">Beginner</option>
-                                        <option value="2">Intermediate</option>
-                                        <option value="3">Advanced</option>
-                                    </Form.Select>
-                                </Form.Group>
-                                <div className="d-grid mt-5">
-                                    <Button variant="primary" type="submit">Submit</Button>
-                                </div>
-                            </Form>
+                        {showModuleForm ? (
+                            <ModuleForm handleChange={handleChange} handleClick={handleClick} />
+                        ) : (
+                            <CourseForm handleChange={handleChange} handleClick={handleClick} />)}
                         </div>
                         </Card.Body>
                     </Card>
@@ -151,4 +149,41 @@ export default function CreateCourse() {
         </Container>
     </>
   );
+}
+
+
+const CourseForm = ({handleChange, handleClick}) => {
+    return (
+        <>
+            <h2 className="fw-bold mb-5 text-uppercase">Create a course</h2>
+            <Form className="mb-3">
+                <Form.Group className="mb-1 mt-4" controlId="formCourseTitle">
+                    <Form.Label className="text-center">
+                        Course Title
+                    </Form.Label>
+                    <Form.Control type="text" placeholder="Enter a course title" name="courseTitle" onChange={handleChange} />
+                </Form.Group>
+                <Form.Group className="mb-1 mt-4" controlId="formCourseDescription">
+                    <Form.Label className="text-center">
+                        Course Description
+                    </Form.Label>
+                    <Form.Control as="textarea" placeholder="Enter a description" name="courseDescription" onChange={handleChange}></Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
+                    <Form.Label className="text-center">
+                        Course Difficulty
+                    </Form.Label>
+                    <Form.Select name="courseDifficulty" onChange={handleChange}>
+                        <option>Select a difficulty</option>
+                        <option value="1">Beginner</option>
+                        <option value="2">Intermediate</option>
+                        <option value="3">Advanced</option>
+                    </Form.Select>
+                </Form.Group>
+                <div className="d-grid mt-5">
+                    <Button variant="primary" type="submit" name="courseForm" onClick={handleClick}>Next</Button>
+                </div>
+            </Form>
+        </>
+    )
 }
