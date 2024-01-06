@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import CreateCourse from './components/CreateCourseForm';
+import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 
 //Done: Build CourseCard component
@@ -33,6 +34,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
         <Route path="/courses/create" element={<CreateCourse />} />
+        <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
