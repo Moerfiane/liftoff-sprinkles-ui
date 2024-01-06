@@ -29,34 +29,34 @@ const ModuleForm = ({handleChange, handleClick}) => {
                 <Form.Label className="text-center">
                     Module Description
                 </Form.Label>
-                <Form.Control as="textarea" placeholder="Enter a description"></Form.Control>
+                <Form.Control as="textarea" placeholder="Enter a description" onChange={(e) => handleChange(e, "module")}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleTools">
                 <Form.Label className="text-center">
                     Module Tools
                 </Form.Label>
-                <Form.Control as="textarea" placeholder="Enter a list of tools"></Form.Control>
+                <Form.Control as="textarea" placeholder="Enter a list of tools" onChange={(e) => handleChange(e, "module")}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleIngredients">
                 <Form.Label className="text-center">
                     Module Ingredients
                 </Form.Label>
-                <Form.Control as="textarea" placeholder="Enter a list of Ingredients"></Form.Control>
+                <Form.Control as="textarea" placeholder="Enter a list of Ingredients" onChange={(e) => handleChange(e, "module")}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleNotes">
                 <Form.Label className="text-center">
                     Module Notes
                 </Form.Label>
-                <Form.Control as="textarea" placeholder="Enter any notes relevant to the recipe"></Form.Control>
+                <Form.Control as="textarea" placeholder="Enter any notes relevant to the recipe" onChange={(e) => handleChange(e, "module")}></Form.Control>
             </Form.Group>
             <Form.Group className="mb-1 mt-4" controlId="formModuleSteps">
                 <Form.Label className="text-center">
                     Module Steps
                 </Form.Label>
-                <Form.Control as="textarea" placeholder="Enter the steps of the recipe"></Form.Control>
+                <Form.Control as="textarea" placeholder="Enter the steps of the recipe" onChange={(e) => handleChange(e, "module")}></Form.Control>
             </Form.Group>
             <div className="d-grid mt-5">
-                <Button variant="primary" type="submit" name="addModule" onClick={handleClick}>
+                <Button variant="primary" type="submit" name="addModule" onClick={(e) => handleClick(e, "module")}>
                     Add Module
                 </Button>
             </div>
@@ -74,56 +74,121 @@ export default function CreateCourse() {
         courseDescription:'',
         courseDifficulty:''
     });
+
+    const [moduleData, setModuleData] = useState({
+        moduleTitle:'',
+        moduleDescription:'',
+        moduleDifficulty:''
+    });
+
     const navigate = useNavigate();
     //triggers display of new module form after course is submitted
     const [showModuleForm, setShowModuleForm] = useState(false);
     //storage for course data as new modules are added
     // const wholeCourseData = new Object;
-    const handleChange = (e) => {
+    const handleChange = (e, formType) => {
         const { name, value } = e.target;
-        setCourseData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
+
+        //TODO: DRY this code
+        if (formType = "course") {
+            setCourseData((prevData) => ({
+                ...prevData,
+                [name]: value,
+              }));
+        } else {
+            setModuleData((prevData) => ({
+                ...prevData,
+                [name]: value,
+              }));
+        }
       };
       
       //TODO: DRY this code
-    const handleClick = async (e) => {
-        event.preventDefault(); 
+    const handleClick = async (e, formType) => {
+        e.preventDefault(); 
 
-    //checks what the button clicked is; if it's courseForm or addModule, it will display another addModule form, otherwise Navigate to courses
-    //Should this be targeted elsewhere and call handleSubmit(e)? 
+
+
     //TODO: set courseId to the object storing the relationships, wholeCourseId
     //TODO: figure out submission
         if (e.target.name == "courseForm" || e.target.name == "addModule") {
-            setShowModuleForm(true);} 
-            else {
-                navigate("/courses");
-            }
-
-        try {
-          console.log(courseData);
-          const response = await fetch('http://localhost:8080/courses/create', { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(courseData),
-           });
-         
-          const data = await response.json();
-          console.log(data.courseId);
-    
-          if (data.success) {
-            console.log(data.message);
-          } else {
-            alert('Course creation failed: ' + data.message); 
-          }
-        } catch (error) {
-          console.error('Login error:', error);
-          alert('An error occurred during course creation');
+            setShowModuleForm(true);
+            
+        } else {
+            navigate("/courses");
         }
+
+        handleSubmit(e, formType);
     };
+    //TODO: DRY this code even further
+    const handleSubmit = async (e, formType) => {
+        
+    /*
+        ONCLICK LOGIC
+        When a user click's the NEXT button on course, it should:
+            1) DONE: setShowModule to true
+            2) send courseData to the backend
+            3) set courseId to what's returned from data response
+        When a user clicks the ADD MODULE button on module, it should:
+            1) DONE: setShowModule to true
+            2) send moduleData to the backend
+        When a user clicks the DONE button on moudle, it should:
+            1) DONE:  navigate to /courses
+            2) send moduleData to the backend
+    */
+
+        if (formType = "course") {
+            try {
+                console.log(courseData);
+                const response = await fetch('http://localhost:8080/courses/create', { 
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(courseData),
+                 });
+               
+                const data = await response.json();
+                console.log(data.courseId);
+          
+                if (data.success) {
+                  console.log(data.message);
+                } else {
+                  alert('Course creation failed: ' + data.message); 
+                }
+              } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during course creation');
+              }
+        } else if (formType="module") {
+            console.log(moduleData);
+
+            // sendData(path, method, headers, body);
+            try {
+                const response = await fetch('http://localhost:8080/courses/create', { 
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify(courseData),
+                 });
+               
+                const data = await response.json();
+                console.log(data.courseId);
+          
+                if (data.success) {
+                  console.log(data.message);
+                } else {
+                  alert('Course creation failed: ' + data.message); 
+                }
+              } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during course creation');
+              }
+        }
+
+
+    }
 
 
 
@@ -161,19 +226,19 @@ const CourseForm = ({handleChange, handleClick}) => {
                     <Form.Label className="text-center">
                         Course Title
                     </Form.Label>
-                    <Form.Control type="text" placeholder="Enter a course title" name="courseTitle" onChange={handleChange} />
+                    <Form.Control type="text" placeholder="Enter a course title" name="courseTitle" onChange={(e) => handleChange(e, "course")} />
                 </Form.Group>
                 <Form.Group className="mb-1 mt-4" controlId="formCourseDescription">
                     <Form.Label className="text-center">
                         Course Description
                     </Form.Label>
-                    <Form.Control as="textarea" placeholder="Enter a description" name="courseDescription" onChange={handleChange}></Form.Control>
+                    <Form.Control as="textarea" placeholder="Enter a description" name="courseDescription" onChange={(e) => handleChange(e, "course")}></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3 mt-4" controlId="formCourseDifficulty">
                     <Form.Label className="text-center">
                         Course Difficulty
                     </Form.Label>
-                    <Form.Select name="courseDifficulty" onChange={handleChange}>
+                    <Form.Select name="courseDifficulty" onChange={(e) => handleChange(e, "course")}>
                         <option>Select a difficulty</option>
                         <option value="1">Beginner</option>
                         <option value="2">Intermediate</option>
@@ -181,7 +246,7 @@ const CourseForm = ({handleChange, handleClick}) => {
                     </Form.Select>
                 </Form.Group>
                 <div className="d-grid mt-5">
-                    <Button variant="primary" type="submit" name="courseForm" onClick={handleClick}>Next</Button>
+                    <Button variant="primary" type="submit" name="courseForm" onClick={(e) => handleClick(e, "course")}>Next</Button>
                 </div>
             </Form>
         </>
