@@ -29,7 +29,8 @@ import UserDetails from './components/UserAccountPage';
 
 
 function App() {
-  return (
+  
+return (
     <Router>
       <Routes>
         <Route path="/login" element={<LogIn />} />
