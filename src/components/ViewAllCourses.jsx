@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Alert } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
+
 
 //TODO: Make container flex
 //TODO: Import data from backend

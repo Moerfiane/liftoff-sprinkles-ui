@@ -29,7 +29,8 @@ import EditUserDetails from './components/EditPage';
 
 
 function App() {
-  return (
+  
+return (
     <Router>
       <Routes>
         <Route path="/login" element={<LogIn />} />
