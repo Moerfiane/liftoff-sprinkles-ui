@@ -2,6 +2,7 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
+import { getRecipe } from './FindNewRecipes';
 // import getData from '../utilities/getData';
 
 //TODO: Make container flex
@@ -27,6 +28,8 @@ const getData = async () => {
       console.error('Error:', error);
       throw error; // Re-throw the error to propagate it up the call stack
   }
+
+  
 };
 
 const freshData = await getData();
