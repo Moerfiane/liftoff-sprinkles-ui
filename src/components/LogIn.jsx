@@ -3,9 +3,10 @@ import {  useState } from "react";
 import { Col, Button, Row, Container, Card, Form, Navbar, Nav } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import Navigation from "./Navbar";
 
 export default function LogIn() {
-  const [email, setEmail] =useState('');
+  const [username, setUsername] =useState('');
   const [password, setPassword] =useState('');
   const navigate = useNavigate();
   const login = async (event) => {
@@ -13,10 +14,12 @@ export default function LogIn() {
 
     try {
       
-      const response = await axios.post('http://localhost:8080/login', { email, password });
+      const response = await axios.post('http://localhost:8080/login', { username, password });
+     
+      console.log('Response:', response);
 
       if (response.data.success) {
-        navigate('/login'); 
+        navigate('/courses'); 
       } else {
         alert('Login failed: ' + response.data.message); 
       }
@@ -27,34 +30,22 @@ export default function LogIn() {
   };
   return (
     <>
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="/admin">Admin</Nav.Link>
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navigation />
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={8} lg={6} xs={12}>
-          <div className="border border-3 border-primary"></div>
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-4">
                 <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                 <p className=" mb-5">Please enter your login and password!</p>
                 <Form className="mb-3">
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label className="text-center">
-                      Email address
+                      Username
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Enter username" value={username}
+                        onChange={(e) => setUsername(e.target.value)}/>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">

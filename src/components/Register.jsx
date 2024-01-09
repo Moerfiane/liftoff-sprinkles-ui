@@ -9,8 +9,13 @@ import {
   Card,
   Form,Navbar, Nav
 } from "react-bootstrap";
-import { Link,useNavigate } from 'react-router-dom';
+import Navigation from "./Navbar";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+
+//TODO: Add e-mail field
+//TODO: Add e-mail confirmation logic
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -34,10 +39,12 @@ export default function Register() {
       });
 
       const data = await response.json();
+      console.log('Response Body:', data);
 
       
       if (data.success) {
         navigate('/'); 
+        
       } else {
         alert(data.message); 
       }
@@ -50,22 +57,10 @@ export default function Register() {
 
   return (
     <>
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link href="/admin">Admin</Nav.Link>
-            
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navigation />
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
-          <div className="border border-3 border-primary"></div>
           <Card className="shadow">
             <Card.Body>
               <div className="mb-3 mt-4">
