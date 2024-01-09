@@ -29,7 +29,9 @@ const getData = async () => {
   }
 };
 
-console.log(await getData());
+const freshData = await getData();
+
+console.log(freshData);
 
 
 const CourseList = ({ data }) => (
@@ -52,7 +54,7 @@ const ViewCourses = () => {
         <Navigation />
         <Container>
             <h1>View All Courses</h1>
-            <CourseList data={data} />
+            <CourseList data={freshData} />
         </Container>
     </>
   );
