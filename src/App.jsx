@@ -38,7 +38,7 @@ return (
         <Route path="/courses/create" element={<CreateCourse />} />
         <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
-        <Route path="/my-account" element={<MyAccount />} />
+        <Route path="/my-account" element={<UserDetails />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>

@@ -7,7 +7,29 @@ import Card from 'react-bootstrap/Card';
 //TODO: Props should include relative URL to course details page that links to course id
 //TODO: Build corresponding backend structure to export
 
-function CourseCard({id, title, description, onEnroll}) {
+function CourseCard({id, title, description}) {
+
+  const handleEnrollment = async (courseId) => {
+    try {
+      const response = await fetch('http://localhost:8080/enroll', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ courseId }),
+      });
+
+      if (response.ok) {
+        console.log(response.message);
+      } else {
+        throw new Error('Enrollment failed');
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -19,7 +41,7 @@ function CourseCard({id, title, description, onEnroll}) {
           {description}
         </Card.Text>
         <Button variant="primary">Course details</Button>
-        <Button variant='secondary' onClick={() => onEnroll(id)}>Enroll</Button>
+        <Button variant='secondary' onClick={handleEnrollment(id)}>Enroll</Button>
       </Card.Body>
     </Card>
   );
