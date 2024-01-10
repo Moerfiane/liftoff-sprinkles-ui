@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 export default function LogIn() {
-  const [email, setEmail] =useState('');
+  const [username, setUsername] =useState('');
   const [password, setPassword] =useState('');
   const navigate = useNavigate();
   const login = async (event) => {
@@ -13,10 +13,10 @@ export default function LogIn() {
 
     try {
       
-      const response = await axios.post('http://localhost:8080/login', { email, password });
+      const response = await axios.post('http://localhost:8080/login', { username, password });
 
-      if (response.data.success) {
-        navigate('/login'); 
+      if (response.status === 200) {
+        navigate('/register'); 
       } else {
         alert('Login failed: ' + response.data.message); 
       }
@@ -51,10 +51,10 @@ export default function LogIn() {
                 <Form className="mb-3">
                   <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label className="text-center">
-                      Email address
+                      User name
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Enter Username" value={username}
+                        onChange={(e) => setUsername(e.target.value)}/>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">
