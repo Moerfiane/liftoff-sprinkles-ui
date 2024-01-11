@@ -4,42 +4,79 @@ import Navigation from "./Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import { apiCreds } from '../assets/credentials';
+import Form from 'react-bootstrap/Form';
+import { useState } from 'react';
 
-// To get the id
 const id = apiCreds.getId();
-
-// To get the key
 const key = apiCreds.getKey();
 
+export default function SearchRecipe () {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [apiResponse, setApiResponse] = useState(null);
 
-const getRecipe = async (searchTerm) => {
-    try {
-        const response = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerm}&app_id=${id}&app_key=${key}`, {
-            method: 'GET', 
-            headers: {
-              'Content-Type': 'application/json',
-            }, 
-        });
-  
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-  
-        const data = await response.json(); // Assuming response is JSON, adjust accordingly
-  
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error; // Re-throw the error to propagate it up the call stack
+    const handleSearch = async () => {
+        try {
+            const data = await getRecipe(searchTerm);
+            console.log('API response:', data);
+            setApiResponse(data);
+            
+          } catch (error) {
+            alert("Sorry, an error has occured with your search \n" + error)
+          }
     }
-  };
 
-const apiResponse = await getRecipe('easy breakfast');
+    const getRecipe = async (searchTerm) => {
+        try {
+            const response = await fetch(`https://api.edamam.com/api/recipes/v2?type=public&q=${searchTerm}&app_id=${id}&app_key=${key}`, {
+                method: 'GET', 
+                headers: {
+                  'Content-Type': 'application/json',
+                }, 
+            });
+      
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            
+            const data = await response.json();
+            console.log('Parsed data:', data); 
+            return data;
+        } catch (error) {
+            console.error('Error:', error);
+            throw error; 
+        }
+      };
 
-  function RecipeList() {
+    return (
+        <>
+            <Navigation />
+            <Container>
+                <h1>Find New Recipes</h1>
+                <SearchBox 
+                    searchTerm={searchTerm} 
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onSubmit={handleSearch}
+                />
+                {apiResponse && <RecipeList apiResponse={apiResponse} />}
+            </Container>
+        </>
+    );
+  }
+
+  function RecipeList({ apiResponse }) {
+    if (!apiResponse) {
+      return <div>No recipes found.</div>;
+    }
+  
+    const hits = apiResponse.hits;
+  
+    if (!hits || !Array.isArray(hits) || hits.length === 0) {
+      return <div>No recipes found.</div>;
+    }
+  
     return (
       <div>
-        {apiResponse.hits.map((hit, index) => (
+        {hits.map((hit, index) => (
           <RecipeCard key={index} {...hit.recipe} />
         ))}
       </div>
@@ -64,21 +101,15 @@ const apiResponse = await getRecipe('easy breakfast');
     );
   }
 
-  export default function SearchRecipe () {
 
+function SearchBox ({ searchTerm, onChange, onSubmit}) {
     return (
         <>
-            <Navigation />
-            <Container>
-                <h1>Find New Recipes</h1>
-                <RecipeList />
-            </Container>
-            
+            <Form.Control size ="lg" type="text" placeholder="Enter a search term" value={searchTerm} onChange={onChange} /> 
+            <Button variant="primary" type="button" onClick={onSubmit}>Search</Button>
         </>
-        
-
     );
-  }
+}
 
 //   export {getRecipe};
 
