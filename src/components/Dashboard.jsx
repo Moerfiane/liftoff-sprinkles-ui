@@ -4,7 +4,7 @@ import ProgressBar from './ProgressBar';
 const Dashboard = () => {
 
     const getEnrolledCourses = async () => {
-        const response = await fetch(); // need to add API endpoint
+        const response = await fetch('http://localhost:8080/user'); // need to add API endpoint
         const data = await response.json();
         return data.courses;
     };

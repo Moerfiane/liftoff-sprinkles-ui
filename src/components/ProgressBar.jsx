@@ -1,16 +1,23 @@
+import React from "react";
+
 const ProgressBar = ({ courseName, progress}) => {
+
+    const progressBarWrapper = {
+        width: '100%',
+        height: '20px',
+    }
 
     const progressBarStyle = {
         width: '${progress}%',
-        height: '20px',
+        height: '100%',
         backgroundColor: '#4caf50', // Green bar
     };
 
     return (
-        <div className="courseProgress">
+        <div style="courseProgress">
             <h3>{courseName}</h3>
-            <div className="progress-bar-wrapper">
-                <div className="progress-bar"></div>
+            <div style={progressBarWrapper}>
+                <div style={progressBarStyle}></div>
             </div>
             <p>Progress: {progress}%</p>
         </div>

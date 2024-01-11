@@ -14,7 +14,7 @@ export default function Navigation() {
           <Nav className="ms-auto">
             <Nav.Link><Link to="/create-course">Create a Course</Link></Nav.Link>
             <Nav.Link><Link to="/view-all-courses">View All Courses</Link></Nav.Link>
-            <Nav.Link><Link to="/my-account">My Account</Link></Nav.Link>
+            <Nav.Link><Link to="/dashboard">My Account</Link></Nav.Link>
             
           </Nav>
         </Navbar.Collapse>
