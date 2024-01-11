@@ -11,6 +11,7 @@ import Register from './components/Register';
 import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
+import SearchRecipe from './components/FindNewRecipes';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -36,6 +37,7 @@ function App() {
         <Route path="/courses/create" element={<CreateCourse />} />
         <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
+        <Route path="/find" element={<SearchRecipe />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>

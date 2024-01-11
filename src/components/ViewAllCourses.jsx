@@ -2,7 +2,6 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
-import { getRecipe } from './FindNewRecipes';
 // import getData from '../utilities/getData';
 
 //TODO: Make container flex

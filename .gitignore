@@ -26,3 +26,4 @@ dist-ssr
 # Basic Components
 src/components/HorizontalFormExample.jsx
 src/components/ListGroupExample.jsx
+src/assets/credentials.js
