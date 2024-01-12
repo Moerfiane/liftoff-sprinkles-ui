@@ -13,6 +13,10 @@ import Navigation from "./Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+
+//TODO: Add e-mail field
+//TODO: Add e-mail confirmation logic
+
 export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -36,9 +40,13 @@ export default function Register() {
 
       const data = await response.json();
 
+      console.log('Response Body:', data);
+
+
       
       if (data.success) {
         navigate('/'); 
+
       } else {
         alert(data.message); 
       }

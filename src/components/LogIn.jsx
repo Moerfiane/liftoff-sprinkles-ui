@@ -1,13 +1,14 @@
 import React from "react";
 import {  useState } from "react";
 import { Col, Button, Row, Container, Card, Form, Navbar, Nav } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Navigation from "./Navbar";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 export default function LogIn() {
-  const [email, setEmail] =useState('');
+  const [username, setUsername] =useState('');
   const [password, setPassword] =useState('');
   const navigate = useNavigate();
   const login = async (event) => {
@@ -15,10 +16,13 @@ export default function LogIn() {
 
     try {
       
-      const response = await axios.post('http://localhost:8080/login', { email, password });
+      const response = await axios.post('http://localhost:8080/login', { username, password });
+     
+      console.log('Response:', response);
 
       if (response.data.success) {
-        navigate('/login'); 
+        navigate('/courses'); 
+        
       } else {
         alert('Login failed: ' + response.data.message); 
       }
@@ -39,12 +43,12 @@ export default function LogIn() {
                 <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                 <p className=" mb-5">Please enter your login and password!</p>
                 <Form className="mb-3">
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label className="text-center">
-                      Email address
+                      Username
                     </Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" value={email}
-                        onChange={(e) => setEmail(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Enter username" value={username}
+                        onChange={(e) => setUsername(e.target.value)}/>
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicPassword">

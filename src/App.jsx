@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import CreateCourse from './components/CreateCourseForm';
+import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import UserDetails from './components/UserAccountPage';
 import EditUserDetails from './components/EditPage';
@@ -35,9 +36,12 @@ return (
       <Routes>
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/create-course" element={<CreateCourse />} />
-        <Route path="/view-all-courses" element={<ViewCourses />} />
+
+        <Route path="/courses/create" element={<CreateCourse />} />
+        <Route path="/courses/modules/create" element={<CreateModule />} />
+        <Route path="/courses" element={<ViewCourses />} />
         <Route path="/my-account" element={<UserDetails />} />
+
         <Route path="/" element={<LogIn />} />
         <Route path="edit-account" element={<EditUserDetails/>} />
       </Routes>
