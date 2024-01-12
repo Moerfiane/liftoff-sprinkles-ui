@@ -16,6 +16,7 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+  const [role, setRole] = useState('');
   const navigate = useNavigate();
   const handleRegister = async (event) => {
     event.preventDefault(); 
@@ -30,7 +31,7 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, verifyPassword }),
+        body: JSON.stringify({ username, password, verifyPassword ,role }),
       });
 
       const data = await response.json();
@@ -55,10 +56,10 @@ export default function Register() {
         <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+<Nav className="ms-auto">
             <Nav.Link href="/admin">Admin</Nav.Link>
-            
-          </Nav>
+          
+</Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
@@ -89,6 +90,14 @@ export default function Register() {
                     <Form.Control type="password" placeholder="verifyPassword" value={verifyPassword}
                       onChange={(e) => setVerifyPassword(e.target.value)}/>
                   </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicRole">
+             <Form.Label>Role</Form.Label>
+            <Form.Select value={role} onChange={(e) => setRole(e.target.value)}>
+           <option value="">Select a role</option>
+           <option value="user">User</option>
+         <option value="admin">Admin</option>
+           </Form.Select>
+     </Form.Group>
                   <div className="d-grid">
                     <Button variant="primary" type="submit" onClick={handleRegister} >
                     Register

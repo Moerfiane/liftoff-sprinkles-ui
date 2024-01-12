@@ -16,7 +16,7 @@ export default function LogIn() {
       const response = await axios.post('http://localhost:8080/login', { username, password });
 
       if (response.status === 200) {
-        navigate('/register'); 
+        navigate('/register'); // to do must change the path
       } else {
         alert('Login failed: ' + response.data.message); 
       }
@@ -32,10 +32,10 @@ export default function LogIn() {
         <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+<Nav className="ms-auto">
             <Nav.Link href="/admin">Admin</Nav.Link>
-            
-          </Nav>
+        
+</Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
