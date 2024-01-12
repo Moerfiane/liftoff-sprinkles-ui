@@ -2,6 +2,7 @@ import { useLocation, useMatch } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import Navigation from './Navbar';
 import { Container } from 'react-bootstrap';
+import ModuleCard from './ModuleCard.jsx'
 
 const getData = async (id) => {
   try {
@@ -52,10 +53,18 @@ const CourseDetailsView = ({ id, updateApp }) => {
             <h2>Description</h2>
             <p>{freshData.description}</p>
             {console.log(freshData.modules)}
+            <ModuleList data={freshData.modules} />
         </Container>
     </>
         
   );
 };
 
+const ModuleList = ({ data }) => (
+    <>
+      {data && data.map((object) => (
+        <ModuleCard key={object.id} {...object} />
+      ))}
+    </>
+  );
 export default CourseDetailsView;

@@ -25,6 +25,7 @@ export default function CreateModule({updateApp}) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(moduleData);
         setModuleData((prevData) => ({
             ...prevData,
             [name]: value,

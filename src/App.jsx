@@ -32,10 +32,13 @@ import CourseDetailsView from './components/CourseDetails';
 
 function App() {
   const [courses, setCourses] = useState([]);
+  console.log(courses);
   const [refreshKey, setRefreshKey] = useState(0);
-
+  //Absolutely not sure if this is the best or most efficient way to do this, but it's what I've got figured out for now!
   const updateApp = () => {
+    console.log(`updating app prev: ${refreshKey}`);
     setRefreshKey(prevKey => prevKey + 1);
+    console.log(`updating app next: ${refreshKey}`);
   };
 
   useEffect(() => {

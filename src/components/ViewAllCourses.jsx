@@ -33,7 +33,7 @@ const getData = async () => {
 const CourseList = ({ data }) => (
   <>
     {data.map((object) => (
-      <CourseCard key={object.id} {...object} />
+      <CourseCard type="Course" key={object.id} {...object} />
     ))}
   </>
 );
