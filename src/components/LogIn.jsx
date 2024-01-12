@@ -28,6 +28,7 @@ export default function LogIn() {
       alert('An error occurred during login');
     }
   };
+  
   return (
     <>
     <Navigation />

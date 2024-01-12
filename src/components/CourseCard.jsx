@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useNavigate } from 'react-router-dom';
 
 //Done: Add props that will translate from a JSON file
 //Done: Props should include course title
@@ -8,6 +9,12 @@ import Card from 'react-bootstrap/Card';
 //TODO: Build corresponding backend structure to export
 
 function CourseCard({id, name, description}) {
+  const navigate = useNavigate();
+
+  const handleClick = async (e) => {
+    navigate(`/courses/view/${id}`, {state: id})
+    }
+
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -18,7 +25,7 @@ function CourseCard({id, name, description}) {
         <Card.Text>
           {description}
         </Card.Text>
-        <Button variant="primary">Course details</Button>
+        <Button variant="primary" onClick={handleClick}>Course details</Button>
       </Card.Body>
     </Card>
   );

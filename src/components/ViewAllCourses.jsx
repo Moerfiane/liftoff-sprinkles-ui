@@ -52,9 +52,8 @@ const ViewCourses = () => {
       }
     };
 
-    fetchData(); // Call the fetchData function when the component mounts
+    fetchData();
 
-    // Specify any dependencies for this useEffect. If empty, it runs once.
   }, []);
 
 
