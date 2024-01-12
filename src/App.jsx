@@ -12,6 +12,8 @@ import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import UserDetails from './components/UserAccountPage';
+import UserDetails from './components/UserAccountPage';
+import EditUserDetails from './components/EditPage';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -35,11 +37,15 @@ return (
       <Routes>
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
+
         <Route path="/courses/create" element={<CreateCourse />} />
         <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
         <Route path="/my-account" element={<UserDetails />} />
+        <Route path="/my-account" element={<UserDetails />} />
+
         <Route path="/" element={<LogIn />} />
+        {/* <Route path="edit-account" element={<EditUserDetails/>} /> */}
       </Routes>
     </Router>
   );

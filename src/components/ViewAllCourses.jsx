@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container, Alert } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
 // import getData from '../utilities/getData';
@@ -7,6 +9,7 @@ import CourseCard from './CourseCard';
 
 //TODO: Make container flex
 //TODO: Import data from backend
+
 
 const getData = async () => {
   try {
@@ -30,7 +33,7 @@ const getData = async () => {
   }
 };
 
-console.log(await getData());
+const freshData = await getData();
 
 
 const CourseList = ({ data }) => (
@@ -50,6 +53,11 @@ const ViewCourses = () => {
 
   return (
     <>
+      <Navigation />
+      <Container>
+        <h1>View All Courses</h1>
+        <CourseList data={freshData} />                                                                                                                                     
+      </Container>
       <Navigation />
       <Container>
         <h1>View All Courses</h1>

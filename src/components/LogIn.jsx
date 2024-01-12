@@ -4,6 +4,8 @@ import { Col, Button, Row, Container, Card, Form, Navbar, Nav } from "react-boot
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Navigation from "./Navbar";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export default function LogIn() {
   const [username, setUsername] =useState('');
@@ -20,6 +22,7 @@ export default function LogIn() {
 
       if (response.data.success) {
         navigate('/courses'); 
+        
       } else {
         alert('Login failed: ' + response.data.message); 
       }

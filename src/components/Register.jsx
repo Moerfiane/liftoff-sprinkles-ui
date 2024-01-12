@@ -39,12 +39,14 @@ export default function Register() {
       });
 
       const data = await response.json();
+
       console.log('Response Body:', data);
+
 
       
       if (data.success) {
         navigate('/'); 
-        
+
       } else {
         alert(data.message); 
       }
