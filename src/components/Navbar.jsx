@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="tertiary" expand="lg">
       <Container>
         <Navbar.Brand href="/">Cooking Buddies</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

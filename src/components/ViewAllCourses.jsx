@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
@@ -27,13 +27,7 @@ const getData = async () => {
       console.error('Error:', error);
       throw error; // Re-throw the error to propagate it up the call stack
   }
-
-  
 };
-
-const freshData = await getData();
-
-console.log(freshData);
 
 
 const CourseList = ({ data }) => (
@@ -45,11 +39,25 @@ const CourseList = ({ data }) => (
 );
 
 const ViewCourses = () => {
-  const data = [
-    { id: 1, title: 'Course 1', description:'this is a description' },
-    { id: 2, title: 'Course 2', description:'this is a description' },
-    { id: 3, title: 'Course 3', description:'this is a description' },
-  ];
+  const [freshData, setFreshData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData();
+        setFreshData(data);
+      } catch (error) {
+        // Handle error if needed
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData(); // Call the fetchData function when the component mounts
+
+    // Specify any dependencies for this useEffect. If empty, it runs once.
+  }, []);
+
+
 
   return (
     <>
