@@ -41,7 +41,7 @@ function CourseCard({id, title, description}) {
           {description}
         </Card.Text>
         <Button variant="primary">Course details</Button>
-        <Button variant='secondary' onClick={handleEnrollment(id)}>Enroll</Button>
+        <Button variant='secondary' onClick={() => handleEnrollment(id)}>Enroll</Button>
       </Card.Body>
     </Card>
   );

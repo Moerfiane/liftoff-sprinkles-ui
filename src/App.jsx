@@ -12,8 +12,7 @@ import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import UserDetails from './components/UserAccountPage';
-import UserDetails from './components/UserAccountPage';
-import EditUserDetails from './components/EditPage';
+// import EditUserDetails from './components/EditPage';
 
 //Done: Build CourseCard component
 //Done: Build Menu component

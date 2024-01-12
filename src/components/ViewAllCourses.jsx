@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Alert } from 'react-bootstrap';
-import React, { useState } from 'react';
-import { Container, Alert } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
 // import getData from '../utilities/getData';
@@ -57,11 +55,6 @@ const ViewCourses = () => {
       <Container>
         <h1>View All Courses</h1>
         <CourseList data={freshData} />                                                                                                                                     
-      </Container>
-      <Navigation />
-      <Container>
-        <h1>View All Courses</h1>
-        <CourseList data={data} />
       </Container>
     </>
   );
