@@ -7,7 +7,7 @@ import Card from 'react-bootstrap/Card';
 //TODO: Props should include relative URL to course details page that links to course id
 //TODO: Build corresponding backend structure to export
 
-function CourseCard({id, title, description}) {
+function CourseCard({id, title, description, onEnroll}) {
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -19,6 +19,7 @@ function CourseCard({id, title, description}) {
           {description}
         </Card.Text>
         <Button variant="primary">Course details</Button>
+        <Button variant='secondary' onClick={() => onEnroll(id)}>Enroll</Button>
       </Card.Body>
     </Card>
   );
