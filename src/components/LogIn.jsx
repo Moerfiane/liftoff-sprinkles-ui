@@ -6,17 +6,21 @@ import axios from "axios";
 import Navigation from "./Navbar";
 import { LoginContext } from "../utilities/checkLogin";
 
+
 export default function LogIn() {
   const [username, setUsername] =useState('');
   const [password, setPassword] =useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('userId') !== null);  
   const navigate = useNavigate();
+
   const login = async (event) => {
     event.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:8080/login', { username, password });
       console.log('Response:', response);
       if (response.data.success) {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("role", response.data.role);
         navigate('/courses'); 
       } else {
         alert('Login failed: ' + response.data.message); 
@@ -47,7 +51,6 @@ export default function LogIn() {
                       <Form.Control type="text" placeholder="Enter username" value={username}
                           onChange={(e) => setUsername(e.target.value)}/>
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                       <Form.Label>Password</Form.Label>
                       <Form.Control type="password" placeholder="Password" value={password}

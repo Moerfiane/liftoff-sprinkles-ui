@@ -3,8 +3,6 @@ import { Container, Navbar, Nav,Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 export default function Navigation() {
-  
-
   function handleLogin() {
     if (localStorage.getItem('userId') !== null) {
       setIsLoggedIn(true);
@@ -15,6 +13,7 @@ export default function Navigation() {
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
     setIsLoggedIn(false);
+
   };
   return (
     <Navbar bg="light" expand="lg">
