@@ -32,6 +32,7 @@ export default function LogIn() {
       alert('An error occurred during login');
     }
   };
+  
   return (
     <>
     <Navbar bg="light" expand="lg">
