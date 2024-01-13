@@ -6,7 +6,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 
 //TODO: Add category
-export default function CreateModule() {
+export default function CreateModule({updateApp}) {
     const location = useLocation();
     const response = location.state;
     const initialModuleData = {
@@ -25,6 +25,7 @@ export default function CreateModule() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        console.log(moduleData);
         setModuleData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -35,9 +36,10 @@ export default function CreateModule() {
         e.preventDefault(); 
 
         if (e.target.name == "addModule") {
-            navigate("/courses/modules/create");
+            navigate("/courses/modules/create", {state: response});
             setModuleData(initialModuleData);
         } else {
+            updateApp();
             navigate("/courses");
         }
 

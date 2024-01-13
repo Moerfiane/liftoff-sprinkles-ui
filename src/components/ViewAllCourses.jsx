@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Alert } from 'react-bootstrap';
+import {useState, useEffect} from 'react';
+import { Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
 // import getData from '../utilities/getData';
@@ -31,26 +31,41 @@ const getData = async () => {
   }
 };
 
-const freshData = await getData();
-
-
 const CourseList = ({ data }) => (
-  <>
+  <Container className="d-flex flex-wrap gap-3">
     {data.map((object) => (
-      <CourseCard key={object.id} {...object} />
+      <CourseCard type="Course" key={object.id} {...object} />
     ))}
-  </>
+  </Container>
 );
 
 const ViewCourses = () => {
+  const [freshData, setFreshData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getData();
+        setFreshData(data);
+      } catch (error) {
+        // Handle error if needed
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+
+  }, []);
+
+
 
   return (
     <>
-      <Navigation />
-      <Container>
-        <h1>View All Courses</h1>
-        <CourseList data={freshData} />                                                                                                                                     
-      </Container>
+        <Navigation />
+        <Container>
+            <h1>View All Courses</h1>
+            <CourseList data={freshData} />
+        </Container>
     </>
   );
 };
