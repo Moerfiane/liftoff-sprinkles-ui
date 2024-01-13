@@ -14,7 +14,7 @@ import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import SearchRecipe from './components/FindNewRecipes';
-
+import CourseFeedback from './components/CourseFeedback';
 //Done: Build CourseCard component
 //Done: Build Menu component
 //Done: Build Sign up component
@@ -41,6 +41,7 @@ function App() {
         <Route path="/courses" element={<ViewCourses />} />
         <Route path="/find" element={<SearchRecipe />} />
         <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/feedback" element={<CourseFeedback />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
     </Router>

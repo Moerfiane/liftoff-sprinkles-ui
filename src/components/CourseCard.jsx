@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
+
 //Done: Add props that will translate from a JSON file
 //Done: Props should include course title
 //Done: Props should include course description
@@ -23,5 +24,6 @@ function CourseCard({id, name, description}) {
     </Card>
   );
 }
+
 
 export default CourseCard;
