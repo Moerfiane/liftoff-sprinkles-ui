@@ -16,13 +16,6 @@ function CourseCard({id, name, description, type}) {
     navigate(`/courses/view/${id}`, {state: id})
     }
 
-function CourseCard({id, name, description, type}) {
-  const navigate = useNavigate();
-
-  const handleClick = async (e) => {
-    navigate(`/courses/view/${id}`, {state: id})
-    }
-
 const userId = 1;
   const handleEnrollment = async (course, user) => {
     try {
@@ -61,7 +54,6 @@ const userId = 1;
       </Card.Body>
     </Card>
   );
-}
 }
 
 
