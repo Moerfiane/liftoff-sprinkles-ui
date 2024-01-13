@@ -4,8 +4,9 @@ import Navigation from './Navbar';
 import CourseCard from './CourseCard';
 // import getData from '../utilities/getData';
 
-//TODO: Make container flex
-//TODO: Import data from backend
+//Done: Make container flex
+//Done: Import data from backend
+//TODO: Add context for enrollment button
 
 const getData = async () => {
   try {

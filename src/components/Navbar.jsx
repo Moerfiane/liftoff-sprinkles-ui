@@ -1,19 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { LoginContext } from "../utilities/checkLogin";
 import { Container, Navbar, Nav,Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
-export default function Navigation() {
-  function handleLogin() {
-    if (localStorage.getItem('userId') !== null) {
-      setIsLoggedIn(true);
-    }
-  }
 
+export default function Navigation() {
+  const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext);
   const logout = async () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
     setIsLoggedIn(false);
-
   };
   return (
     <Navbar bg="light" expand="lg">

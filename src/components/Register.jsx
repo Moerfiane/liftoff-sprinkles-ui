@@ -13,9 +13,9 @@ import Navigation from "./Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-
 //TODO: Add e-mail field
 //TODO: Add e-mail confirmation logic
+//TODO: Add context for conditional rendering of form - should not render if user is logged in
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -51,7 +51,6 @@ export default function Register() {
           navigate('/courses'); 
         }
 
-        
       } else {
         alert(data.message); 
       }
@@ -62,11 +61,7 @@ export default function Register() {
 
   return (
     <>
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="/">Cooking Buddies</Navbar.Brand>
-      </Container>
-    </Navbar>
+    <Navigation />
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
@@ -88,7 +83,7 @@ export default function Register() {
                     <Form.Control type="password" placeholder="Password" value={password}
                       onChange={(e) => setPassword(e.target.value)} />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Group className="mb-3" controlId="formBasicVerifyPassword">
                     <Form.Label>Verify Password</Form.Label>
                     <Form.Control type="password" placeholder="verifyPassword" value={verifyPassword}
                       onChange={(e) => setVerifyPassword(e.target.value)}/>
