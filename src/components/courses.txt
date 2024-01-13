@@ -1,34 +1,278 @@
-course_id: {
-    course_title: "a title";
-    course_description: "a longer description";
-    course_image: "a path to an image url";
-    course_difficulty: "an option from three of beginner, intermediate, or advanced";
-    course_modules: {
-        module_1: {
-            module_title: "a title for the module";
-            module_isCompleted: "a boolean indicating whether the user has completed the module or not";
-            module_description: "a one-sentence description of the module";
-            module_tools: {
-                1: "first tool";
-                2: "second tool";
-                };
-            module_ingredients: {
-                1: "first ingredient";
-                2: "second igredient";
-                };
-            module_notes: "a paragraph or multiple objects of notes that will get added above the recipe instructions (e.g., egg types)";
-            module_steps: {
-                1: "step one in cooking";
-                2: "step two in cooking";
-            }
-        }
-    }
-    course_quiz: {
-        question_1:
-        answer_1:
-        question_2:
-        answer_2:
-        question_3:
-        answer_3:
-    }
-}
+//START COURSE 1
+Title
+You Can’t Even Boil an Egg 
+
+Description
+So you can't even boil an egg? Join us on a journey to master cooking basics. 
+
+Difficulty
+Beginner 
+ 
+//START MODULE 1.1
+Title
+Boiled Egg 
+
+Description
+Think boiling an egg is easy? You’d be surprised how many introductory cooks struggle with this basic cooking task. Let’s take it step-by-step in this module. 
+ 
+Tools
+* Pot: For boiling water 
+* Timer 
+* Slotted spoon or tongs 
+* Bowl with ice water 
+  
+Ingredients
+* Eggs (depending on how many you are wanting to cook) 
+* Water 
+* Salt(optional) 
+
+Notes
+* Soft-boiled egg with runny yolk - cook for 4-5 minutes (solid whites, yolk is still runny) (great for dipping toast in) 
+* Medium-boiled egg with partial set yolk - cook for 6-7 minutes (solid white, yolk is mostly set but still slightly runny in the middle) 
+* Hard-boiled eggs- cook for 9-12 minutes (white and yolk are completely cooked, yolk will be firm and pale yellow, overcooking may cause greenish ring around the yolk but still safe to eat) (perfect for deviled eggs) 
+
+Steps
+1) Place the eggs in a single layer at the bottom of a pot. 
+2) Fill the pot with enough water to cover the eggs by about an inch. 
+3) Bring the water to a boil over medium-high heat. 
+4) Once the water boils, reduce the heat to low (or turn it off for gas stoves) to maintain a gentle simmer. 
+5) Start timing the eggs based on your desired level of doneness. 
+6) When the cooking time is up, remove the eggs with a slotted spoon or tongs and place them in a bowl of ice water to stop the cooking process. This step is especially important for soft and medium-boiled eggs to prevent further cooking. 
+ 
+//START MODULE 1.2
+Title
+Grilled Cheese Sandwich 
+
+Description
+Another basic that is surprisingly easy to mess up! Plagued by burnt toast and unmelty cheese? Follow along with this module to learn the secrets of the perfect grilled cheese! 
+
+Tools
+* Non-stick Skillet or Frying Pan: For cooking the sandwich 
+* Spatula: To flip the sandwich 
+* Butter knife: For spreading the butter 
+
+Ingredients
+* Bread: 2 Slices (white, wheat, or your choice) 
+* Cheese: 2 Slices or about ½ cup shredded cheese (Cheddar, Swiss, American, or a mix) 
+* Butter: 1-2 tablespoons, softened 
+
+
+Steps
+Prepare the sandwich: 
+* Spread butter evenly on one side of each bread slice. The butter should be at room temperature to make spreading easier. 
+* Place one slice of bread, buttered side down, on a plate. 
+* Add your cheese on top of the bread. If you're using extras like tomato or bacon, add them on top of the cheese. 
+* Top with the second slice of bread, buttered side up. 
+ 
+Cook the sandwich: 
+* Heat your skillet or frying pan over medium heat. 
+* Once the pan is warm, place the sandwich in the pan, buttered side down. 
+* Cook for about 2-4 minutes until the bottom is golden brown and crispy. 
+* Carefully flip the sandwich with the spatula and cook the other side for another 2-4 minutes until it’s also golden brown and the cheese is melted. 
+ 
+Serve: 
+* Remove the sandwich from the pan and let it sit for a minute before cutting. 
+* Slice the sandwich in half and serve hot 
+ 
+//START MODULE 1.3
+Title
+Pancakes For Two  
+
+Description
+Disheartened by your dense, burnt, or undercooked pancakes? Follow along with this module and you'll be ready for some delicious breakfast - for you AND a friend.
+
+Tools needed: 
+* Mixing Bowl: For mixing the batter. 
+* Whisk or Fork: For combining the ingredients. 
+* Measuring Cups and Spoons: For measuring ingredients. 
+* Skillet or Griddle: For cooking pancakes. 
+* Spatula: For flipping the pancakes. 
+* Ladle or Large Spoon: For pouring the batter onto the skillet. 
+
+Ingredients needed: 
+* All-Purpose Flour: 1 cup 
+* Sugar: 2 tablespoons 
+* Baking Powder: 2 teaspoons 
+* Salt: 1/4 teaspoon 
+* Milk: 3/4 cup 
+* Egg: 1, large 
+* Unsalted Butter: 2 tablespoons, melted, plus more for cooking 
+* Vanilla Extract (optional): 1/2 teaspoon 
+ 
+Steps
+Mix Dry Ingredients: 
+* In the mixing bowl, whisk together the flour, sugar, baking powder, and salt. 
+
+Add Wet Ingredients: 
+* Make a well in the center of the dry ingredients. 
+* Pour in the milk, egg, melted butter, and vanilla extract (if using). 
+* Mix until just combined. The batter might be slightly lumpy, and that’s okay. Avoid over-mixing. 
+
+Heat the Skillet: 
+* Heat a skillet or griddle over medium heat. 
+* Lightly brush with melted butter or oil. 
+
+Cook the Pancakes: 
+* Pour about 1/4 cup of batter onto the skillet for each pancake. 
+* Cook until bubbles form on the surface of the pancake and the edges look set, about 1-2 minutes. 
+* Flip with the spatula and cook the other side until golden brown and the pancake is cooked through, another 1-2 minutes. 
+
+Serve: 
+* Serve hot with your favorite toppings such as maple syrup, fresh fruits, or a sprinkle of powdered sugar. 
+ 
+//START COURSE 2
+Title
+We're Chopping Now 
+
+Description
+You’ve mastered the basics, but are you ready to level up? Join us as we take our next steps on our quest to cooking mastery. 
+
+Difficulty
+Intermediate
+
+//START MODULE 2.1
+
+Title
+Spaghetti With Homemade Sauce 
+
+Description
+Who needs a can of everyone’s favorite cartoon chef when you have all the ingredients to make delicious spaghetti – with your own homemade sauce? 
+
+Tools 
+* Large pot: For boiling the noodles 
+* Colander: For draining the cooked noodles 
+* Large skillet or Saucepan: For making the tomato sauce 
+* Wooden spoon or spatula: For stirring the sauce 
+* Measuring spoons: For measuring the oil, salt, herbs and sugar 
+* Can opener: For canned tomatoes 
+
+Ingredients
+For the spaghetti: 
+* Spaghetti noodles: 8 ounces (half a box or package) 
+* Salt: 2 tablespoons (for pasta water) 
+
+For the Tomato Sauce: 
+* Olive oil: 2 tablespoons 
+* Garlic: 2 cloves, minced 
+* Onion: 1 medium, finely chopped  
+* Canned tomatoes: 1 can (28 ounces) of crushed or whole tomatoes 
+* Dried basil: 1 teaspoon 
+* Dried oregano: 1 teaspoon 
+* Salt and pepper: To taste 
+* Sugar (optional): A pinch, to balance acidity 
+
+For serving: 
+* Grated parmesan: To taste 
+* Fresh basil leaves: for garnish (optional) 
+
+Steps
+Cook the Spaghetti: 
+* Fill the large pot with water, add 2 tablespoons of salt, and bring to a boil. 
+* Add the spaghetti and cook according to package instructions (usually about 8-10 minutes) until al dente. 
+* Drain the spaghetti in the colander. 
+ 
+Make the Tomato Sauce: 
+* In a large skillet, heat the olive oil over medium heat. 
+* Add the chopped onion and minced garlic, and sauté until the onion is translucent. 
+* Add the canned tomatoes, basil, oregano, salt, pepper, and optional sugar. If using whole tomatoes, break them down with a spoon. 
+* Simmer the sauce for about 15-20 minutes, stirring occasionally. 
+Combine and Serve: 
+* Toss the drained spaghetti with the tomato sauce. 
+* Serve with grated Parmesan cheese and garnish with fresh basil leaves, if desired. 
+ 
+//START MODULE 2.2
+Title
+Banana Bread 
+
+Description
+Listen, you might not be a monkey, but wouldn’t you go bananas for your own homemade banana bread? All punning aside, quick breads are a cinch to make and so delicious – you'll be glad you tried this challenge. 
+
+Tools
+* Loaf Pan (typically 9x5 inches) 
+* Mixing Bowls: One large, one medium 
+* Measuring Cups and Spoons 
+* Fork (for mashing bananas) 
+* Whisk or Hand Mixer 
+* Spatula 
+* Oven 
+
+Ingredients
+* Ripe Bananas: 3 medium-sized (the riper, the better for sweetness and texture) 
+* All-Purpose Flour: 2 cups 
+* Baking Soda: 1 teaspoon 
+* Salt: 1/4 teaspoon 
+* Unsalted Butter: 1/2 cup (1 stick), melted and cooled 
+* Sugar: 3/4 cup (you can use white, brown, or a mix of both) 
+* Eggs: 2 large 
+* Vanilla Extract: 1 teaspoon 
+* Optional Add-ins: 1/2 cup of chopped nuts (like walnuts or pecans), chocolate chips, or dried fruit 
+
+Steps
+Preheat and Prepare: 
+* Preheat your oven to 350°F (175°C). 
+* Grease your loaf pan with butter or non-stick spray. 
+
+Mix Dry Ingredients: 
+* In the medium mixing bowl, whisk together the flour, baking soda, and salt. 
+Prepare Bananas and Wet Ingredients: 
+* In the large mixing bowl, mash the bananas with a fork until smooth. 
+* Add the melted butter to the bananas and mix well. 
+* Stir in the sugar, beaten eggs, and vanilla extract. Mix until well combined. 
+
+Combine Wet and Dry Ingredients: 
+* Add the dry ingredients to the wet ingredients. Use a spatula to fold the ingredients together just until combined. Avoid over-mixing. 
+* If you're using any optional add-ins like nuts or chocolate chips, gently fold them in at this stage. 
+
+Bake: 
+* Pour the batter into the prepared loaf pan. 
+* Bake for about 60-65 minutes, or until a toothpick inserted into the center of the bread comes out clean. 
+
+Cool and Serve: 
+* Let the banana bread cool in the pan for about 10 minutes, then transfer it to a wire rack to cool completely. 
+* Slice and serve. 
+ 
+//START MODULE 2.3
+Title
+Omelet 
+
+Description
+You know what they say: you want an omelet? You’re going to have to crack some eggs. Is that how it goes? True that omelets can be a challenge for many, but with enough practice, you’ll be in fluffy omelet heaven. 
+
+Tools Needed 
+* Non-Stick Skillet: Preferably 8-10 inches in diameter. 
+* Whisk or Fork: For beating the eggs. 
+* Spatula: For flipping and folding the omelet. 
+* Mixing Bowl: For beating the eggs. 
+* Knife: For chopping fillings. 
+* Stove: For cooking. 
+
+Ingredients 
+* Eggs: 2-3 large 
+* Salt: A pinch 
+* Pepper: A pinch 
+* Butter or Oil: 1 tablespoon, for cooking 
+* Optional Fillings: Cheese (grated), diced vegetables (like bell peppers, onions, mushrooms), cooked ham or bacon, herbs (like chives or parsley) 
+ 
+Steps
+Prepare the Fillings: 
+* If you're using fillings like vegetables or ham, make sure they're chopped into small pieces and pre-cooked if necessary. 
+
+Beat the Eggs: 
+* Crack the eggs into a mixing bowl. 
+* Add a pinch of salt and pepper. 
+* Beat the eggs with a whisk or fork until the yolks and whites are fully combined. 
+
+Cook the Omelet: 
+* Heat the butter or oil in a non-stick skillet over medium heat. 
+* Once the butter is melted or the oil is hot, pour in the beaten eggs. 
+* Let the eggs sit for a moment until they begin to set around the edges. 
+* Gently lift the edges of the omelet with a spatula, tilting the skillet to let the uncooked egg flow to the edges. 
+* When the eggs are set but still slightly runny on top, add your chosen fillings on one half of the omelet. 
+
+Fold and Serve: 
+* Carefully fold the omelet in half over the fillings using the spatula. 
+* Let it cook for another minute or so, until it's fully set but not overcooked. 
+* Slide the omelet onto a plate. 
+
+Garnish (Optional): 
+* Garnish with additional herbs, cheese, or a sprinkle of salt and pepper to taste. 
