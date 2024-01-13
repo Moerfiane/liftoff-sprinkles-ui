@@ -9,14 +9,14 @@ import Card from 'react-bootstrap/Card';
 
 function CourseCard({id, title, description}) {
 
-  const handleEnrollment = async (courseId) => {
+  const handleEnrollment = async (courseId, userId) => {
     try {
       const response = await fetch('http://localhost:8080/enroll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ courseId }),
+        body: JSON.stringify({ courseId, userId }),
       });
 
       if (response.ok) {
