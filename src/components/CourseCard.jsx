@@ -8,15 +8,15 @@ import Card from 'react-bootstrap/Card';
 //TODO: Build corresponding backend structure to export
 
 function CourseCard({id, title, description}) {
-
-  const handleEnrollment = async (courseId, userId) => {
+const userId = 1;
+  const handleEnrollment = async (course, user) => {
     try {
-      const response = await fetch('http://localhost:8080/enroll', {
+      const response = await fetch('http://localhost:8080/courses/enroll', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ courseId, userId }),
+        body: JSON.stringify({ course, user }),
       });
 
       if (response.ok) {
@@ -29,7 +29,7 @@ function CourseCard({id, title, description}) {
     }
   };
 
-
+//TODO: update hard coded data in handle enrollment
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -41,7 +41,7 @@ function CourseCard({id, title, description}) {
           {description}
         </Card.Text>
         <Button variant="primary">Course details</Button>
-        <Button variant='secondary' onClick={() => handleEnrollment(id)}>Enroll</Button>
+        <Button variant='secondary' onClick={() => handleEnrollment(id, userId)}>Enroll</Button>
       </Card.Body>
     </Card>
   );

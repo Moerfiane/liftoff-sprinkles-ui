@@ -43,11 +43,6 @@ const CourseList = ({ data }) => (
 );
 
 const ViewCourses = () => {
-  const [data, setData] = useState([
-    { id: 1, title: 'Course 1', description: 'this is a description' },
-    { id: 2, title: 'Course 2', description: 'this is a description' },
-    { id: 3, title: 'Course 3', description: 'this is a description' },
-  ]);
 
   return (
     <>
