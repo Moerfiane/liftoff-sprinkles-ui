@@ -31,9 +31,9 @@ const getData = async () => {
   
 };
 
-const freshData = await getData();
+// const freshData = await getData();
 
-console.log(freshData);
+// console.log(freshData);
 
 
 const CourseList = ({ data }) => (
@@ -56,7 +56,7 @@ const ViewCourses = () => {
         <Navigation />
         <Container>
             <h1>View All Courses</h1>
-            <CourseList data={freshData} />
+            {/* <CourseList data={freshData} /> */}
         </Container>
     </>
   );
