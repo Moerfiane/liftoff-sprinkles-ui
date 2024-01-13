@@ -19,8 +19,8 @@ export default function Navigation() {
           <Nav className="ms-auto">
             {localStorage.getItem('role') === 'admin' && <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>}
             <Nav.Link><Link to="/courses">View All Courses</Link></Nav.Link>
+            <Nav.Link><Link to="/dashboard">My Account</Link></Nav.Link>
             <Nav.Link onClick={() => logout()}><Link to="/">logout</Link></Nav.Link>
-            
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import './App.css';
 //import CreateAccountForm from './components/CreateAccountForm';
@@ -8,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import Container  from 'react-bootstrap/Container';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
+import Dashboard from './components/Dashboard';
 import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
@@ -38,6 +40,7 @@ function App() {
         <Route path="/courses/modules/create" element={<CreateModule />} />
         <Route path="/courses" element={<ViewCourses />} />
         <Route path="/find" element={<SearchRecipe />} />
+        <Route path="/dashboard" element={<Dashboard />} /> 
         <Route path="/feedback" element={<CourseFeedback />} />
         <Route path="/" element={<LogIn />} />
       </Routes>
@@ -46,4 +49,4 @@ function App() {
 }
 
 
-export default App
+export default App;
