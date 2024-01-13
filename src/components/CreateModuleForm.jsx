@@ -36,7 +36,7 @@ export default function CreateModule({updateApp}) {
         e.preventDefault(); 
 
         if (e.target.name == "addModule") {
-            navigate("/courses/modules/create");
+            navigate("/courses/modules/create", {state: response});
             setModuleData(initialModuleData);
         } else {
             updateApp();
