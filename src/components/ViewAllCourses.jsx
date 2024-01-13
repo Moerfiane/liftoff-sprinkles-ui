@@ -29,7 +29,6 @@ const getData = async () => {
   }
 };
 
-
 const CourseList = ({ data }) => (
   <Container className="d-flex flex-wrap gap-3">
     {data.map((object) => (
@@ -63,7 +62,7 @@ const ViewCourses = () => {
         <Navigation />
         <Container>
             <h1>View All Courses</h1>
-            <CourseList data={freshData} />
+            {/* <CourseList data={freshData} /> */}
         </Container>
     </>
   );

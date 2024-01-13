@@ -5,10 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Navigation from "./Navbar";
 
+
 export default function LogIn() {
   const [username, setUsername] =useState('');
   const [password, setPassword] =useState('');
   const navigate = useNavigate();
+
   const login = async (event) => {
     event.preventDefault(); 
 
@@ -19,6 +21,8 @@ export default function LogIn() {
       console.log('Response:', response);
 
       if (response.data.success) {
+        localStorage.setItem("userId", response.data.userId);
+        localStorage.setItem("role", response.data.role);
         navigate('/courses'); 
       } else {
         alert('Login failed: ' + response.data.message); 
@@ -31,7 +35,11 @@ export default function LogIn() {
   
   return (
     <>
-    <Navigation />
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">Cooking Buddies</Navbar.Brand>
+      </Container>
+    </Navbar>
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={8} lg={6} xs={12}>

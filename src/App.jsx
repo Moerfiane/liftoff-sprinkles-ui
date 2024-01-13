@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react'
 import './App.css';
 //import CreateAccountForm from './components/CreateAccountForm';
@@ -8,11 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import Container  from 'react-bootstrap/Container';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
+import Dashboard from './components/Dashboard';
 import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import SearchRecipe from './components/FindNewRecipes';
 import CourseDetailsView from './components/ViewCourseDetails';
+import CourseFeedback from './components/CourseFeedback';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -74,6 +77,8 @@ function App() {
         <Route path="/courses/modules/create" element={<CreateModule updateApp={updateApp} />} />
         <Route path="/courses" element={<ViewCourses />} />
         <Route path="/find" element={<SearchRecipe />} />
+        <Route path="/dashboard" element={<Dashboard />} /> 
+        <Route path="/feedback" element={<CourseFeedback />} />
         <Route path="/" element={<LogIn />} />
         {courses.map(course => (
           <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id} updateApp={updateApp} />} />
@@ -84,4 +89,4 @@ function App() {
 }
 
 
-export default App
+export default App;

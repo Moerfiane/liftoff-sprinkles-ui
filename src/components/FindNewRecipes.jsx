@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Navigation from "./Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
-import { apiCreds } from '../assets/credentials';
+import { apiCreds } from './assets/credentials';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 
@@ -18,6 +18,7 @@ export default function SearchRecipe () {
         try {
             const data = await getRecipe(searchTerm);
             console.log('API response:', data);
+
             setApiResponse(data);
             
           } catch (error) {

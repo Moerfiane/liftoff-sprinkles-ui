@@ -43,21 +43,30 @@ export default function Register() {
 
       
       if (data.success) {
-        navigate('/'); 
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("role", data.role);
+        if(data.role === 'admin') {
+          navigate('/courses/create'); 
+        } else  {
+          navigate('/courses'); 
+        }
+
         
       } else {
         alert(data.message); 
       }
     } catch (error) {
-      console.error('Registration error:', error);
-      alert('An error occurred during registration');
     }
   };
 
 
   return (
     <>
-    <Navigation />
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="/">Cooking Buddies</Navbar.Brand>
+      </Container>
+    </Navbar>
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
