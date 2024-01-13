@@ -62,7 +62,7 @@ const ViewCourses = () => {
         <Navigation />
         <Container>
             <h1>View All Courses</h1>
-            {/* <CourseList data={freshData} /> */}
+            <CourseList data={freshData} />
         </Container>
     </>
   );
