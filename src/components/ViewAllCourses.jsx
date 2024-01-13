@@ -31,11 +31,11 @@ const getData = async () => {
 
 
 const CourseList = ({ data }) => (
-  <>
+  <Container className="d-flex flex-wrap gap-3">
     {data.map((object) => (
       <CourseCard type="Course" key={object.id} {...object} />
     ))}
-  </>
+  </Container>
 );
 
 const ViewCourses = () => {

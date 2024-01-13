@@ -12,7 +12,7 @@ import CreateCourse from './components/CreateCourseForm';
 import CreateModule from './components/CreateModuleForm';
 import ViewCourses from './components/ViewAllCourses';
 import SearchRecipe from './components/FindNewRecipes';
-import CourseDetailsView from './components/CourseDetails';
+import CourseDetailsView from './components/ViewCourseDetails';
 
 //Done: Build CourseCard component
 //Done: Build Menu component

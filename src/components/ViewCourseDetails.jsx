@@ -1,6 +1,6 @@
 import { useLocation, useMatch } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import Navigation from './Navbar';
+import Navigation from './Navbar.jsx';
 import { Container } from 'react-bootstrap';
 import ModuleCard from './ModuleCard.jsx'
 
@@ -61,10 +61,10 @@ const CourseDetailsView = ({ id, updateApp }) => {
 };
 
 const ModuleList = ({ data }) => (
-    <>
+    <Container className="d-flex flex-wrap gap-3" >
       {data && data.map((object) => (
         <ModuleCard key={object.id} {...object} />
       ))}
-    </>
+    </Container>
   );
 export default CourseDetailsView;

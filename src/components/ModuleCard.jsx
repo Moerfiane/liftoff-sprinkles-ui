@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Row,Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 //Done: Add props that will translate from a JSON file
@@ -16,16 +17,18 @@ function ModuleCard({id, name, description}) {
     }
 
   return (
-    <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>
-          {description}
-        </Card.Text>
-        <Button variant="primary" onClick={handleClick}>Start Module</Button>
-      </Card.Body>
-    </Card>
+    
+        <Card style={{ width: '18rem' }} key={id}>
+          <Card.Body className="d-flex flex-column h-100">
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>
+              {description}
+            </Card.Text>
+            <Button className='mt-auto' variant="primary" onClick={handleClick}>Start Module</Button>
+          </Card.Body>
+        </Card>
+    
   );
 }
 
-export default CourseCard;
+export default ModuleCard;
