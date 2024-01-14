@@ -39,7 +39,8 @@ export default function Navigation() {
 
 const LoggedInMenu = ({logoutUser}) => (
   <>
-    {localStorage.getItem('role') === 'admin' && <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>}
+    {/* {localStorage.getItem('role') === 'admin' && <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>} */}
+    <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>
     <Nav.Link><Link to="/dashboard">My Account</Link></Nav.Link>
     <Nav.Link onClick={() => logoutUser()}><Link to="/">Logout</Link></Nav.Link>
   </>

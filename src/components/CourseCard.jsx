@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
+import {useState, useContext} from "react";
+import { LoginContext } from '../utilities/checkLogin';
 
 
 //Done: Add props that will translate from a JSON file
@@ -10,12 +12,19 @@ import { useNavigate } from 'react-router-dom';
 //Done: Build corresponding backend structure to export
 
 function CourseCard({id, name, description, type}) {
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  const handleClick = async (e) => {
-    navigate(`/courses/view/${id}`, {state: id})
+  const handleClick = async (buttonId) => {
+    if (buttonId === "enroll") {
+      navigate(`/courses/enroll` , {state: id});
+    } else if (buttonId === "login")  {
+      navigate("/register");
+    } else if (buttonId === "details") {
+      navigate(`/courses/view/${id}`, {state: id});
     }
-
+  }
+ 
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -26,7 +35,8 @@ function CourseCard({id, name, description, type}) {
         <Card.Text>
           {description}
         </Card.Text>
-        <Button className="mt-auto" variant="primary" onClick={handleClick}>{type} details</Button>
+        {isLoggedIn ? <Button variant="secondary" courseId={id} onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
+        <Button className="mt-auto" variant="primary" onClick={() => handleClick("details")}>{type} details</Button>
       </Card.Body>
     </Card>
   );
