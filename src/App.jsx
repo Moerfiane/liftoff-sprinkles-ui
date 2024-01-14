@@ -17,6 +17,7 @@ import SearchRecipe from './components/FindNewRecipes';
 import CourseDetailsView from './components/ViewCourseDetails';
 import CourseFeedback from './components/CourseFeedback';
 import { LoginContext } from './utilities/checkLogin';
+import EnrollConfirmationPage from './components/EnrollmentConfirmation';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -84,6 +85,7 @@ function App() {
             <Route path="/find" element={<SearchRecipe />} />
             <Route path="/dashboard" element={<Dashboard />} /> 
             <Route path="/feedback" element={<CourseFeedback />} />
+            <Route path="/courses/enroll" element={<EnrollConfirmationPage/>} />
             <Route path="/" element={<LogIn />} />
             {courses.map(course => (
               <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id} updateApp={updateApp} />} />

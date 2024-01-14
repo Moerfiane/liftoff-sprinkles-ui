@@ -35,7 +35,7 @@ function CourseCard({id, name, description, type}) {
         <Card.Text>
           {description}
         </Card.Text>
-        {isLoggedIn ? <Button variant="secondary" courseId={id} onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
+        {isLoggedIn ? <Button variant="secondary" onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
         <Button className="mt-auto" variant="primary" onClick={() => handleClick("details")}>{type} details</Button>
       </Card.Body>
     </Card>
