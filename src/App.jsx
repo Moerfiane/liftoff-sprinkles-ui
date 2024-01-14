@@ -16,6 +16,7 @@ import ViewCourses from './components/ViewAllCourses';
 import SearchRecipe from './components/FindNewRecipes';
 import CourseDetailsView from './components/ViewCourseDetails';
 import CourseFeedback from './components/CourseFeedback';
+import { LoginContext } from './utilities/checkLogin';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -34,6 +35,9 @@ import CourseFeedback from './components/CourseFeedback';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('userId') !== null);  
+
+
   const [courses, setCourses] = useState([]);
   console.log(courses);
   const [refreshKey, setRefreshKey] = useState(0);
@@ -69,22 +73,24 @@ function App() {
   }, [refreshKey]);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/courses/create" element={<CreateCourse updateApp={updateApp} />} />
-        <Route path="/courses/modules/create" element={<CreateModule updateApp={updateApp} />} />
-        <Route path="/courses" element={<ViewCourses />} />
-        <Route path="/find" element={<SearchRecipe />} />
-        <Route path="/dashboard" element={<Dashboard />} /> 
-        <Route path="/feedback" element={<CourseFeedback />} />
-        <Route path="/" element={<LogIn />} />
-        {courses.map(course => (
-          <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id} updateApp={updateApp} />} />
-        ))}
-      </Routes>
-    </Router>
+      <LoginContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/courses/create" element={<CreateCourse updateApp={updateApp} />} />
+            <Route path="/courses/modules/create" element={<CreateModule updateApp={updateApp} />} />
+            <Route path="/courses" element={<ViewCourses />} />
+            <Route path="/find" element={<SearchRecipe />} />
+            <Route path="/dashboard" element={<Dashboard />} /> 
+            <Route path="/feedback" element={<CourseFeedback />} />
+            <Route path="/" element={<LogIn />} />
+            {courses.map(course => (
+              <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id} updateApp={updateApp} />} />
+            ))}
+          </Routes>
+        </Router>
+    </LoginContext.Provider>
   );
 }
 
