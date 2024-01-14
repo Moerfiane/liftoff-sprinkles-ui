@@ -55,6 +55,7 @@ export default function Register() {
         alert(data.message); 
       }
     } catch (error) {
+      console.log(error);
     }
   };
 
