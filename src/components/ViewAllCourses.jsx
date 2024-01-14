@@ -24,14 +24,14 @@ const { courses, setCourses, updateApp } = useContext(CourseContext);
 useEffect(() => {
   const fetchData = async () => {
     try {
-      await updateApp(); // Use updateApp directly to fetch and update data
+      await updateApp(); // 
     } catch (error) {
       console.error('Error fetching data:', error);
     }
   };
 
-  fetchData(); // Call fetchData function
-}, []); // Empty dependency array to run the effect only on mount
+  fetchData();
+}, []); 
 
   return (
     <>
