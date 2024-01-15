@@ -1,12 +1,14 @@
 import Navigation from './Navbar';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { sendData } from '../utilities/sendData';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
+import { CourseContext } from '../utilities/checkCourses';
 
 //TODO: Add category
-export default function CreateModule({updateApp}) {
+export default function CreateModule() {
+    const { updateApp } = useContext(CourseContext);
     const location = useLocation();
     const response = location.state;
     const initialModuleData = {
