@@ -16,8 +16,9 @@ import ViewCourses from './components/ViewAllCourses';
 import SearchRecipe from './components/FindNewRecipes';
 import CourseDetailsView from './components/ViewCourseDetails';
 import CourseFeedback from './components/CourseFeedback';
-import UserDetails from './components/UserAccountPage';
-// import EditUserDetails from './components/EditPage';
+import { LoginContext } from './utilities/checkLogin';
+import EnrollConfirmationPage from './components/EnrollmentConfirmation';
+import { CourseContext } from './utilities/checkCourses';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -36,18 +37,11 @@ import UserDetails from './components/UserAccountPage';
 
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('userId') !== null);  
   const [courses, setCourses] = useState([]);
-  console.log(courses);
-  const [refreshKey, setRefreshKey] = useState(0);
+  
   //Absolutely not sure if this is the best or most efficient way to do this, but it's what I've got figured out for now!
-  const updateApp = () => {
-    console.log(`updating app prev: ${refreshKey}`);
-    setRefreshKey(prevKey => prevKey + 1);
-    console.log(`updating app next: ${refreshKey}`);
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
+  const updateApp = async () => {
       try {
         const response = await fetch(`http://localhost:8080/courses`, {
           method: 'GET',
@@ -55,38 +49,44 @@ function App() {
             'Content-Type': 'application/json',
           },
         });
-
+    
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-
+    
         const data = await response.json();
+        console.log(data);
         setCourses(data);
+        console.log(courses);
       } catch (error) {
         console.error('Error:', error);
       }
     };
+  
 
-    fetchData();
-  }, [refreshKey]);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/courses/create" element={<CreateCourse updateApp={updateApp} />} />
-        <Route path="/courses/modules/create" element={<CreateModule updateApp={updateApp} />} />
-        <Route path="/courses" element={<ViewCourses />} />
-        <Route path="/find" element={<SearchRecipe />} />
-        <Route path="/dashboard" element={<Dashboard />} /> 
-        <Route path="/feedback" element={<CourseFeedback />} />
-        <Route path="/" element={<LogIn />} />
-        {courses.map(course => (
-          <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id} updateApp={updateApp} />} />
-        ))}
-      </Routes>
-    </Router>
+      <LoginContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+        <CourseContext.Provider value={{courses, setCourses, updateApp}}>
+          <Router>
+            <Routes>
+              <Route path="/login" element={<LogIn />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/courses/create" element={<CreateCourse />} />
+              <Route path="/courses/modules/create" element={<CreateModule />} />
+              <Route path="/courses" element={<ViewCourses />} />
+              <Route path="/find" element={<SearchRecipe />} />
+              <Route path="/dashboard" element={<Dashboard />} /> 
+              <Route path="/feedback" element={<CourseFeedback />} />
+              <Route path="/courses/enroll" element={<EnrollConfirmationPage/>} />
+              <Route path="/" element={<LogIn />} />
+              {courses.map(course => (
+                <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id}/>} />
+              ))}
+            </Routes>
+          </Router>
+        </CourseContext.Provider>
+    </LoginContext.Provider>
   );
 }
 

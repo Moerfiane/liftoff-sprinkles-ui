@@ -1,35 +1,14 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Container } from 'react-bootstrap';
 import Navigation from './Navbar';
 import CourseCard from './CourseCard';
+import { CourseContext } from '../utilities/checkCourses';
 // import getData from '../utilities/getData';
 
+//Done: Make container flex
+//Done: Import data from backend
+//TODO: Add context for enrollment button
 
-//TODO: Make container flex
-//TODO: Import data from backend
-
-
-const getData = async () => {
-  try {
-      const response = await fetch(`http://localhost:8080/courses`, {
-          method: 'GET', 
-          headers: {
-            'Content-Type': 'application/json',
-          }, 
-      });
-
-      if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json(); // Assuming response is JSON, adjust accordingly
-
-      return data;
-  } catch (error) {
-      console.error('Error:', error);
-      throw error; // Re-throw the error to propagate it up the call stack
-  }
-};
 
 const CourseList = ({ data }) => (
   <Container className="d-flex flex-wrap gap-3">
@@ -40,31 +19,26 @@ const CourseList = ({ data }) => (
 );
 
 const ViewCourses = () => {
-  const [freshData, setFreshData] = useState([]);
+const { courses, setCourses, updateApp } = useContext(CourseContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getData();
-        setFreshData(data);
-      } catch (error) {
-        // Handle error if needed
-        console.error('Error fetching data:', error);
-      }
-    };
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      await updateApp(); // 
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-    fetchData();
-
-  }, []);
-
-
+  fetchData();
+}, []); 
 
   return (
     <>
         <Navigation />
         <Container>
             <h1>View All Courses</h1>
-            <CourseList data={freshData} />
+            <CourseList data={courses} />
         </Container>
     </>
   );

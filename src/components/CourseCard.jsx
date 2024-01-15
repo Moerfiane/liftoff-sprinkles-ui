@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useNavigate } from 'react-router-dom';
+import {useState, useContext} from "react";
+import { LoginContext } from '../utilities/checkLogin';
 
 
 //Done: Add props that will translate from a JSON file
@@ -10,34 +12,19 @@ import { useNavigate } from 'react-router-dom';
 //Done: Build corresponding backend structure to export
 
 function CourseCard({id, name, description, type}) {
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  const handleClick = async (e) => {
-    navigate(`/courses/view/${id}`, {state: id})
+  const handleClick = async (buttonId) => {
+    if (buttonId === "enroll") {
+      navigate(`/courses/enroll` , {state: id});
+    } else if (buttonId === "login")  {
+      navigate("/register");
+    } else if (buttonId === "details") {
+      navigate(`/courses/view/${id}`, {state: id});
     }
-
-const userId = 1;
-  const handleEnrollment = async (course, user) => {
-    try {
-      const response = await fetch('http://localhost:8080/courses/enroll', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ course, user }),
-      });
-
-      if (response.ok) {
-        console.log(response.message);
-      } else {
-        throw new Error('Enrollment failed');
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-//TODO: update hard coded data in handle enrollment
+  }
+ 
   return (
     <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
       <Card.Img variant="top" src="assets/egg.jpg" />
@@ -48,9 +35,8 @@ const userId = 1;
         <Card.Text>
           {description}
         </Card.Text>
-        {/* <Button variant="primary">Course details</Button> */}
-        <Button variant='secondary' onClick={() => handleEnrollment(id, userId)}>Enroll</Button>
-        <Button className="mt-auto" variant="primary" onClick={handleClick}>{type} details</Button>
+        {isLoggedIn ? <Button variant="secondary" onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
+        <Button className="mt-auto" variant="primary" onClick={() => handleClick("details")}>{type} details</Button>
       </Card.Body>
     </Card>
   );
