@@ -17,7 +17,6 @@ export default function SearchRecipe () {
     const handleSearch = async () => {
         try {
             const data = await getRecipe(searchTerm);
-            console.log('API response:', data);
 
             setApiResponse(data);
             
@@ -40,7 +39,6 @@ export default function SearchRecipe () {
             }
             
             const data = await response.json();
-            console.log('Parsed data:', data); 
             return data;
         } catch (error) {
             console.error('Error:', error);
@@ -58,7 +56,7 @@ export default function SearchRecipe () {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     onSubmit={handleSearch}
                 />
-                {apiResponse && <RecipeList apiResponse={apiResponse} />}
+                  {apiResponse && <RecipeList apiResponse={apiResponse} />}
             </Container>
         </>
     );
@@ -76,11 +74,11 @@ export default function SearchRecipe () {
     }
   
     return (
-      <div>
+      <Container className="d-flex flex-wrap gap-3">
         {hits.map((hit, index) => (
-          <RecipeCard key={index} {...hit.recipe} />
+            <RecipeCard key={index} {...hit.recipe} />
         ))}
-      </div>
+      </Container>
     );
   }
   
@@ -89,7 +87,6 @@ export default function SearchRecipe () {
     return (
       <Card style={{ width: '18rem' }} key={id} className="mb-3 mt-3">
         <Card.Img variant="top" src={image} alt={`Image for ${label}`} />
-    
         <Card.Body>
           <Card.Title>{label}</Card.Title>
           <Card.Text>

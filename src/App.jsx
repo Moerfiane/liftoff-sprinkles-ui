@@ -19,6 +19,7 @@ import CourseFeedback from './components/CourseFeedback';
 import { LoginContext } from './utilities/checkLogin';
 import EnrollConfirmationPage from './components/EnrollmentConfirmation';
 import { CourseContext } from './utilities/checkCourses';
+import ModuleDetailsView from './components/ViewModuleDetails';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -72,17 +73,16 @@ function App() {
             <Routes>
               <Route path="/login" element={<LogIn />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/courses/create" element={<CreateCourse />} />
-              <Route path="/courses/modules/create" element={<CreateModule />} />
               <Route path="/courses" element={<ViewCourses />} />
+                <Route path="/courses/create" element={<CreateCourse />} />
+                <Route path="/courses/enroll" element={<EnrollConfirmationPage/>} />
+                <Route path="/courses/modules/create" element={<CreateModule />} />
+                  <Route path="courses/view/:courseId" element={<CourseDetailsView />} />
+                    <Route path="/courses/view/:courseId/:moduleId" element={<ModuleDetailsView />}/>
               <Route path="/find" element={<SearchRecipe />} />
               <Route path="/dashboard" element={<Dashboard />} /> 
               <Route path="/feedback" element={<CourseFeedback />} />
-              <Route path="/courses/enroll" element={<EnrollConfirmationPage/>} />
               <Route path="/" element={<LogIn />} />
-              {courses.map(course => (
-                <Route key={course.id} path={`courses/view/${course.id}`} element={<CourseDetailsView id={course.id}/>} />
-              ))}
             </Routes>
           </Router>
         </CourseContext.Provider>

@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext);
+  const user = parseInt(localStorage.getItem('userId'));
+
+
   const logout = async () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
@@ -29,6 +32,7 @@ export default function Navigation() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
           <Nav.Link><Link to="/courses">View All Courses</Link></Nav.Link>
+          <Nav.Link><Link to="/find">Find Recipes</Link></Nav.Link>
             {isLoggedIn ? <LoggedInMenu logoutUser={logout} /> : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
           </Nav>
         </Navbar.Collapse>
