@@ -26,7 +26,7 @@ const EnrollConfirmationPage = () => {
     if (response.success) {
       navigate(`/courses/view/${course}`);
     } else {
-      setAlertBody(response.message);
+      setAlertBody("You're already enrolled in this course");
       setShow(true);
     }
   }

@@ -15,6 +15,7 @@ const sendData = async (path, method, headers, body) => {
         return data;
       } else {
         console.error('Failed to send data' + data.message);
+        return data;
       }
     } catch (error) {
       console.error('Error sending data:', error);
