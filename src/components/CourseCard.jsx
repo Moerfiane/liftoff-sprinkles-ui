@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {useState, useContext} from "react";
 import { LoginContext } from '../utilities/checkLogin';
 
@@ -14,6 +14,7 @@ import { LoginContext } from '../utilities/checkLogin';
 function CourseCard({id, name, description, type}) {
   const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const navigate = useNavigate();
+  const { courseId } = useParams();
 
   const handleClick = async (buttonId) => {
     if (buttonId === "enroll") {

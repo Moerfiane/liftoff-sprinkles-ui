@@ -1,13 +1,17 @@
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useParams} from 'react-router-dom';
 import React, { useState, useEffect, useContext } from 'react';
 import Navigation from './Navbar.jsx';
 import { Container, Button, Card } from 'react-bootstrap';
 import { CourseContext } from '../utilities/checkCourses';
 import ModuleDetailsView from './ViewModuleDetails.jsx';
 
-const CourseDetailsView = ({ id }) => {
+const CourseDetailsView = () => {
+  const { courseId } = useParams();
+
+  const thisId = parseInt(courseId);
   const { courses, setCourses, updateApp } = useContext(CourseContext);
-  const thisCourse = courses.find(course=>course.id === id);
+  const thisCourse = courses.find(course=>course.id === thisId);
+
   const navigate = useNavigate();
 
   //TODO: send course object to ViewModuleDetails
@@ -23,31 +27,35 @@ const CourseDetailsView = ({ id }) => {
             <h2>Description</h2>
             <p>{thisCourse.description}</p>
             {console.log(thisCourse.modules)}
-            <ModuleList data={thisCourse.modules} />
-            <Routes>
-              <Route path="/:moduleId" element={<ModuleDetailsView />}/>
-            </Routes>
+            <ModuleList data={thisCourse.modules} courseId={thisCourse.id} />
+            {/* <Routes>
+              <Route path="/courses/view/:courseId/:moduleId" element={<ModuleDetailsView />}/>
+            </Routes> */}
         </Container>
     </>
         
   );
 };
 
-const ModuleList = ({ data }) => (
+const ModuleList = ({ data, courseId }) => (
     <Container className="d-flex flex-wrap gap-3" >
       {data && data.map((object) => (
-        <ModuleCard key={object.id} {...object} />
+        <ModuleCard key={object.id} {...object} thisModule={object} courseId={courseId}/>
       ))}
     </Container>
   );
 
 
 
-function ModuleCard({id, name, description}) {
+function ModuleCard({id, name, description, thisModule, courseId}) {
   const navigate = useNavigate();
-
-  const handleClick = async (e) => {
-    navigate(`/courses/view/${id}`, {state: id})
+  const moduleId = id;
+  const handleClick = (e) => {
+    console.log("TRIGGERED HANDLE CLICK");
+    e.preventDefault();
+    console.log(thisModule);
+    // navigate to /:moduleId where module id is a variable of id of module
+    navigate(`/courses/view/${courseId}/${moduleId}`, {state: {thisModule}})
     }
 
   return (
