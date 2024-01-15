@@ -56,6 +56,8 @@ export default function Register() {
         alert(data.message); 
       }
     } catch (error) {
+      console.error('Registration error:', error);
+      alert('An error occurred during registration');
     }
   };
 

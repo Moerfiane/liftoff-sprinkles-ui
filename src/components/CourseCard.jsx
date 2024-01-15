@@ -48,13 +48,14 @@ const userId = 1;
         <Card.Text>
           {description}
         </Card.Text>
-        <Button variant="primary">Course details</Button>
+        {/* <Button variant="primary">Course details</Button> */}
         <Button variant='secondary' onClick={() => handleEnrollment(id, userId)}>Enroll</Button>
         <Button className="mt-auto" variant="primary" onClick={handleClick}>{type} details</Button>
       </Card.Body>
     </Card>
   );
 }
+
 
 
 export default CourseCard;
