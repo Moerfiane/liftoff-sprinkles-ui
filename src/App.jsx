@@ -74,7 +74,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/courses/create" element={<CreateCourse />} />
               <Route path="/courses/modules/create" element={<CreateModule />} />
-              <Route path="/courses" element={<ViewCourses />} />
+              <Route path="/courses/*" element={<ViewCourses />} />
               <Route path="/find" element={<SearchRecipe />} />
               <Route path="/dashboard" element={<Dashboard />} /> 
               <Route path="/feedback" element={<CourseFeedback />} />
