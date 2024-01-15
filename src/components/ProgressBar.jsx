@@ -14,7 +14,8 @@ const ProgressBar = ({ courseName, progress}) => {
     };
 
     return (
-        <div style="courseProgress">
+        // <div style="courseProgress">
+        <div>
             <h3>{courseName}</h3>
             <div style={progressBarWrapper}>
                 <div style={progressBarStyle}></div>

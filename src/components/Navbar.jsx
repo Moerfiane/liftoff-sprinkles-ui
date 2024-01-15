@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext);
+  const user = parseInt(localStorage.getItem('userId'));
+
+
   const logout = async () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("role");
