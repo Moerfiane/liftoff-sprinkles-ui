@@ -23,10 +23,9 @@ const FavoriteCoursePage = () => {
     let response = await sendData('/courses/favorite', 'POST', {'Content-Type': 'application/json'}, data);
     console.log(response);
     if (response.success) {
-      setAlertBody("Course favorited successfully!");
-      setShow(true);
+        navigate(`/courses/view/{courseId}`);
     } else {
-      setAlertBody(response.message || "An error occurred while favoriting the course");
+      setAlertBody("An error occurred while favoriting the course");
       setShow(true);
     }
   }
@@ -45,7 +44,7 @@ const FavoriteCoursePage = () => {
                 <Button variant="danger">Cancel</Button>
               </div>
             </Card>
-            <Alert className="mt-5" show={show} variant={response.success ? "success" : "warning"}>{alertBody}</Alert>
+            <Alert className="mt-5" show={show} variant="warning">{alertBody}</Alert>
         </Col>
         </Row>
     </Container>
