@@ -13,7 +13,6 @@ const Dashboard = () => {
 
     const getEnrolledCourses = async () => {
         let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        console.log(response.data);
         return response.data;
     };
 
