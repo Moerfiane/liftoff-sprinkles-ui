@@ -10,10 +10,8 @@ const Dashboard = () => {
 
     const data = {'userId': user};
 
-
     const getEnrolledCourses = async () => {
         let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        console.log(response.data);
         return response.data;
     };
 
@@ -24,6 +22,9 @@ const Dashboard = () => {
             .then((courses) => {
                 setEnrolledCourses(courses);
                 setLoading(false);
+            })
+            .then((progress) => {
+                console.log('Course Progress:', progress);
             })
             .catch((error) => {
                 console.error('Error fetching enrolled courses:', error);
@@ -46,7 +47,7 @@ const Dashboard = () => {
                         ) : (
                             enrolledCourses.length > 0 ? (
                                 enrolledCourses.map((course) => (
-                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.progress} />
+                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.courseProgress} />
                                 ))
                             ) : (
                                 <p>You are not currently enrolled in any courses.</p>
