@@ -10,6 +10,7 @@ const EnrollConfirmationPage = () => {
   const course = location.state;
   const user = localStorage.getItem('userId');
 
+
   const [show, setShow] = useState(false);
   const [alertBody, setAlertBody] = useState('');
 
@@ -18,11 +19,13 @@ const EnrollConfirmationPage = () => {
     userId: parseInt(user),
   }
 
+  const handleGoBack = () => {
+    navigate(-1);
+  }
+
   const handleEnrollment = async (e) => {
     e.preventDefault();
-    console.log(data);
     let response = await sendData('/courses/enroll', 'POST', {'Content-Type': 'application/json'}, data);
-    console.log(response);
     if (response.success) {
       navigate(`/courses/view/${course}`);
     } else {
@@ -41,8 +44,8 @@ const EnrollConfirmationPage = () => {
                     <h2 className="fw-bold m-2 text-uppercase">Confirm your enrollment</h2>
                     <p className="m-3">Are you sure you want to enroll in that course?</p>
                     <div className="d-grid m-3">
-                      <Button className="mb-3 mt-3" variant="primary" onClick={handleEnrollment}>Enroll me!</Button>
-                      <Button variant="danger">Nevermind</Button>
+                      <Button className="mb-3 mt-3" variant="success" onClick={handleEnrollment}>Enroll me!</Button>
+                      <Button variant="danger" onClick={handleGoBack}>Nevermind</Button>
                     </div>
                   </Card>
                   <Alert className="mt-5" show={show} variant="warning">{alertBody}</Alert>
