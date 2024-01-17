@@ -12,7 +12,7 @@ const Dashboard = () => {
 
     const getEnrolledCourses = async () => {
         let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        return response.data;
+        return response;
     };
 
     const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -20,11 +20,10 @@ const Dashboard = () => {
     useEffect(() => {
         getEnrolledCourses()
             .then((courses) => {
-                setEnrolledCourses(courses);
+                console.log(courses.enrolledCourses[0]);
+                setEnrolledCourses(courses.enrolledCourses);
+                console.log('Course Progress:', courses.enrolledCourses[0].courseProgress);
                 setLoading(false);
-            })
-            .then((progress) => {
-                console.log('Course Progress:', progress);
             })
             .catch((error) => {
                 console.error('Error fetching enrolled courses:', error);

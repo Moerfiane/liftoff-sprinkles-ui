@@ -1,8 +1,8 @@
 import React from "react";
 
-const ProgressBar = ({ courseName, courseProgress}) => {
+const ProgressBar = ({ key, courseName, progress}) => {
 
-    console.log(courseProgress);
+    console.log(progress);
     console.log(courseName);
     const progressBarWrapper = {
         width: '100%',
@@ -11,7 +11,7 @@ const ProgressBar = ({ courseName, courseProgress}) => {
     }
 
     const progressBarStyle = {
-        width: `${courseProgress}%`,
+        width: `${progress}%`,
         height: '100%',
         backgroundColor: '#4caf50', // Green bar
     };
@@ -21,9 +21,9 @@ const ProgressBar = ({ courseName, courseProgress}) => {
         <div>
             <h3>{courseName}</h3>
             <div style={progressBarWrapper}>
-                <div style={{ ...progressBarStyle, width: `${courseProgress}%` }}></div>
+                <div style={{ ...progressBarStyle, width: `${progress}%` }}></div>
             </div>
-            <p>Progress: {courseProgress}%</p>
+            <p>Progress: {progress}%</p>
         </div>
     );
 };
