@@ -19,10 +19,14 @@ export default function LogIn() {
       if (response.data.success) {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("role", response.data.role);
-        navigate("/courses");
-        setIsLoggedIn(true);
+        if(response.data.role === 'admin') {
+          navigate('/courses/create'); 
+        } else  {
+          navigate('/courses'); 
+        }
+
       } else {
-        alert('Login failed: ' + response.data.message); 
+        alert(response.data.message); 
       }
     } catch (error) {
       console.error('Login error:', error);
