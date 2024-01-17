@@ -20,9 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         getEnrolledCourses()
             .then((courses) => {
-                console.log(courses.enrolledCourses[0]);
                 setEnrolledCourses(courses.enrolledCourses);
-                console.log('Course Progress:', courses.enrolledCourses[0].courseProgress);
                 setLoading(false);
             })
             .catch((error) => {
