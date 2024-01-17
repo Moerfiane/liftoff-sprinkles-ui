@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import { LoginContext } from "../utilities/checkLogin";
-import { Container, Navbar, Nav,Row, Col } from "react-bootstrap";
+import { Container, Navbar, Nav,Row, Col, NavDropdown } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 
 
@@ -45,7 +45,11 @@ const LoggedInMenu = ({logoutUser}) => (
   <>
     {/* {localStorage.getItem('role') === 'admin' && <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>} */}
     <Nav.Link><Link to="/courses/create">Create a Course</Link></Nav.Link>
-    <Nav.Link><Link to="/dashboard">My Account</Link></Nav.Link>
+
+    <NavDropdown title="My Account" id="my-account-dropdown">
+      <NavDropdown.Item><Link to="/dashboard">Dashboard</Link></NavDropdown.Item>
+      <NavDropdown.Item><Link to="/dashboard/favorites">Favorite Courses</Link></NavDropdown.Item>
+    </NavDropdown>
     <Nav.Link onClick={() => logoutUser()}><Link to="/">Logout</Link></Nav.Link>
   </>
 )

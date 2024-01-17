@@ -11,25 +11,25 @@ const Dashboard = () => {
     const data = {'userId': user};
 
 
-    const getEnrolledCourses = async () => {
-        let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        console.log(response.data);
-        return response.data;
-    };
+    // const getEnrolledCourses = async () => {
+    //     let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
+    //     console.log(response.data);
+    //     return response.data;
+    // };
 
-    const [enrolledCourses, setEnrolledCourses] = useState([]);
+    // const [enrolledCourses, setEnrolledCourses] = useState([]);
 
-    useEffect(() => {
-        getEnrolledCourses()
-            .then((courses) => {
-                setEnrolledCourses(courses);
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error fetching enrolled courses:', error);
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     getEnrolledCourses()
+    //         .then((courses) => {
+    //             setEnrolledCourses(courses);
+    //             setLoading(false);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching enrolled courses:', error);
+    //             setLoading(false);
+    //         });
+    // }, []);
 
 
     return (
@@ -37,7 +37,7 @@ const Dashboard = () => {
         <Navigation />
             <Container>
             <div>
-                <Col xs={6} md={8} lg={12}>
+                <Col xs={6} md={8} lg={12} className="d-flex">
                     <Card>
                         <Card.Body>
                         <h2 className="fw-bold mb-5 text-uppercase">Currently Enrolled Courses</h2>
