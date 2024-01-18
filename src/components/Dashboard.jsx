@@ -15,7 +15,7 @@ const Dashboard = () => {
         return response.data;
     };
 
-    const [enrolledCourses, setEnrolledCourses] = useState([]);
+    // const [enrolledCourses, setEnrolledCourses] = useState([]);
 
     useEffect(() => {
         getEnrolledCourses()
@@ -33,12 +33,13 @@ const Dashboard = () => {
     }, []);
 
 
+
     return (
         <>
         <Navigation />
             <Container>
             <div>
-                <Col xs={6} md={8} lg={12}>
+                <Col xs={6} md={8} lg={12} className="d-flex">
                     <Card>
                         <Card.Body>
                         <h2 className="fw-bold mb-5 text-uppercase">Currently Enrolled Courses</h2>
