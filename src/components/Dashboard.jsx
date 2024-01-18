@@ -16,7 +16,7 @@ const Dashboard = () => {
         return response;
     };
 
-    // const [enrolledCourses, setEnrolledCourses] = useState([]);
+    const [enrolledCourses, setEnrolledCourses] = useState([]);
 
     useEffect(() => {
         getEnrolledCourses()
