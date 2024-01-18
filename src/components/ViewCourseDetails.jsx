@@ -20,7 +20,7 @@ const CourseDetailsView = () => {
     //https://ui.dev/react-router-url-parameters
 
   const handleClick = () => {
-    navigate("/dashboard/favorites", {state: thisId});
+    navigate("/dashboard/favorites/confirm", {state: thisId});
   }
 
   return (
