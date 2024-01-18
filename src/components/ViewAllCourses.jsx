@@ -66,12 +66,16 @@ function CourseCard({id, name, description, type}) {
       {/* Photo by <a href="https://unsplash.com/@mustafabashari?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Mustafa Bashari</a> on <a href="https://unsplash.com/photos/white-egg-lot-on-brown-wooden-table-rKUK4EB8F7s?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a> */}
   
       <Card.Body className="d-flex flex-column h-100">
-        <Card.Title>{name}</Card.Title>
-        <Card.Text>
-          {description}
-        </Card.Text>
-        {isLoggedIn ? <Button variant="secondary" onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
-        <Button className="mt-auto" variant="primary" onClick={() => handleClick("details")}>{type} details</Button>
+        <div className="flex-grow-1">
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>
+              {description}
+            </Card.Text>
+        </div>
+        <div className="d-flex flex-column mt-4 gap-3">
+          {isLoggedIn ? <Button variant="success" onClick={() => handleClick("enroll")}>Enroll</Button> : <Button variant="secondary" onClick={() => handleClick("login")}>Login to enroll</Button>}
+          <Button className="mt-auto" variant="secondary" onClick={() => handleClick("details")}>{type} details</Button>
+        </div>
       </Card.Body>
     </Card>
   );
