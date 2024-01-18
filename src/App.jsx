@@ -1,12 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
 import './App.css';
-//import CreateAccountForm from './components/CreateAccountForm';
-// import HorizontalExample from './components/HorizontalFormExample';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import CourseCard from './components/CourseCard';
-//import Container  from 'react-bootstrap/Container';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
@@ -23,22 +19,6 @@ import ModuleDetailsView from './components/ViewModuleDetails';
 import FavoriteCoursePage from './components/FavoriteCourse';
 import FavoriteCourseConfirmationPage from './components/ConfirmFavoriteCourse';
 import { FavoriteContext } from './utilities/checkFavorites';
-
-//Done: Build CourseCard component
-//Done: Build Menu component
-//Done: Build Sign up component
-//Done: Build Login component
-//TODO: Create a function that will refresh App routes when new courses are created
-//TODO: Build Hero component
-//TODO: Write about content
-//TODO: Build Account Management screen
-//TODO: Build CoursePage screen
-//TODO: Build CourseCompletion screen
-//TODO: Build Search screen
-//Done: Build AddCourse screen
-//Done: Set routes using react-router Set useState variables to refresh page based on menu items clicked
-
-
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('userId') !== null);  
