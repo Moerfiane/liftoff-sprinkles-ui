@@ -11,8 +11,6 @@ const sendData = async (path, method, headers, body) => {
       const data = await response.json();
 
       if (data.success) {
-        console.log(data.message);
-        console.log(data);
         return data;
       } else {
         console.error('Failed to send data' + data.message);

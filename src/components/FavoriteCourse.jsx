@@ -35,17 +35,9 @@ const FavoriteCoursePage = () => {
     let response = await sendData('/dashboard/favorite', 'POST', {'Content-Type': 'application/json'}, data);
 
     let thisData = await response.data;
-    console.log(`${thisData}`);
-    thisData.forEach(point=> {
-      console.log(point.id);
-      console.log(point.name);
-      console.log(point.description)
-    })
     //getting error response is not defined
     if (response.success) {
-
         setCourseData(thisData);
-        console.log(`${courseData}`)
     } else {
       setAlertBody("An error occurred while favoriting the course");
       setShow(true);
@@ -64,10 +56,7 @@ const FavoriteCoursePage = () => {
         <CourseList data={courseData}/>
       ))}
       <Alert className="mt-5" show={show} variant="warning">{alertBody}</Alert>
-      {/* 
-        for each course in favoriteCourses
-        return a CourseCard w/ link to Course Data
-      */}
+
 
     </Container>
     </>
@@ -105,13 +94,6 @@ const FavoriteCourseConfirmation = ({handleFavorite}) => {
 }
 
 const CourseList = ({ data }) => {
-  console.log(data);
-  data.forEach(point => {
-    // <CourseCard id={point.id} name={point.name} description={point.description} />
-    console.log(`response id: ${point.id}`);
-    console.log(`response name: ${point.name}`);
-    console.log(`response difficulty: ${point.difficulty}`);
-  });
   return (
     <Container className="d-flex flex-wrap gap-3">
       {data.map(point => (
