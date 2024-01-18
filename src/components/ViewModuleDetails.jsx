@@ -1,15 +1,50 @@
-import { Navbar, Button, Container } from "react-bootstrap";
-import { useParams, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Navbar, Button, Container, Alert } from "react-bootstrap";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, state, useState } from "react";
 import { CourseContext } from "../utilities/checkCourses";
 import Navigation from "./Navbar";
+import { sendData } from "../utilities/sendData";
 
 
 
 const ModuleDetailsView = () => {
     const { courseId, moduleId } = useParams();
+    const navigate = useNavigate();
+    // const location = useLocation();
     const { state } = useLocation();
+    const user = localStorage.getItem('userId');
     const thisModule = state?.thisModule;
+    const course = thisModule.courseId;
+    const [alertBody, setAlertBody] = useState('');
+    const [show, setShow] = useState(false);
+
+    console.log(thisModule);
+
+    const completeModule = async (e) => {
+        e.preventDefault();
+
+        const data = { 
+            moduleId, 
+            // courseId: course, 
+            userId: parseInt(user), 
+        };
+
+        try {
+        let response = await sendData('/dashboard/complete-module', 'POST', {'Content-Type': 'application/json'}, data);
+        console.log(response);
+        if (response.success) {
+          navigate(-1);
+        } else {
+          setAlertBody("There was an issue marking the module as completed.");
+          setShow(true);
+        }
+      } catch (error) {
+        console.error('Error completing module:', error);
+        setAlertBody("There was an unexpected error");
+        setShow(true);
+      }
+    }
+
     return(
         <>
             <Navigation />
@@ -20,7 +55,7 @@ const ModuleDetailsView = () => {
                 <p>{thisModule.steps}</p>
                 <p>{thisModule.tools}</p>
                 <p>{thisModule.notes}</p>
-                <Button>Done!</Button>
+                <Button onClick={completeModule}>Done!</Button>
             </Container>
         </>
     )

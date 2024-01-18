@@ -17,17 +17,21 @@ const Dashboard = () => {
 
     // const [enrolledCourses, setEnrolledCourses] = useState([]);
 
-    // useEffect(() => {
-    //     getEnrolledCourses()
-    //         .then((courses) => {
-    //             setEnrolledCourses(courses);
-    //             setLoading(false);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching enrolled courses:', error);
-    //             setLoading(false);
-    //         });
-    // }, []);
+    useEffect(() => {
+        getEnrolledCourses()
+            .then((courses) => {
+                setEnrolledCourses(courses);
+                setLoading(false);
+            })
+            .then((progress) => {
+                console.log('Course Progress:', progress);
+            })
+            .catch((error) => {
+                console.error('Error fetching enrolled courses:', error);
+                setLoading(false);
+            });
+    }, []);
+
 
 
     return (
@@ -44,7 +48,7 @@ const Dashboard = () => {
                         ) : (
                             enrolledCourses.length > 0 ? (
                                 enrolledCourses.map((course) => (
-                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.progress} />
+                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.courseProgress} />
                                 ))
                             ) : (
                                 <p>You are not currently enrolled in any courses.</p>
