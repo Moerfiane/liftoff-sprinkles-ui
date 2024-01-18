@@ -20,6 +20,7 @@ import { LoginContext } from './utilities/checkLogin';
 import EnrollConfirmationPage from './components/EnrollmentConfirmation';
 import { CourseContext } from './utilities/checkCourses';
 import ModuleDetailsView from './components/ViewModuleDetails';
+import FavoriteCoursePage from './components/FavoriteCourse';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -78,7 +79,8 @@ function App() {
                   <Route path="courses/view/:courseId" element={<CourseDetailsView />} />
                     <Route path="/courses/view/:courseId/:moduleId" element={<ModuleDetailsView />}/>
               <Route path="/find" element={<SearchRecipe />} />
-              <Route path="/dashboard" element={<Dashboard />} /> 
+              <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/dashboard/favorites" element={<FavoriteCoursePage />} />
               <Route path="/feedback" element={<CourseFeedback />} />
               <Route path="/" element={<LogIn />} />
             </Routes>

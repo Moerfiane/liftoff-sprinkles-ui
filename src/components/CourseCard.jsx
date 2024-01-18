@@ -44,4 +44,5 @@ function CourseCard({id, name, description, type}) {
 }
 
 
+
 export default CourseCard;
