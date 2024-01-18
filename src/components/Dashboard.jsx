@@ -16,7 +16,8 @@ const Dashboard = () => {
     const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext);
     const navigate = useNavigate();
 
-    const data = {userId : user};
+    const data = {'userId': user};
+
 
     const getEnrolledCourses = async () => {
         try {
@@ -86,7 +87,7 @@ const Dashboard = () => {
         <Navigation />
             <Container>
             <div>
-                <Col xs={6} md={8} lg={12}>
+                <Col xs={6} md={8} lg={12} className="d-flex">
                     <Card className="mb-4">
                         <Card.Body>
                         <h2 className="fw-bold mb-5 text-uppercase">Currently Enrolled Courses</h2>

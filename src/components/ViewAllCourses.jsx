@@ -54,7 +54,7 @@ function CourseCard({id, name, description, type}) {
     if (buttonId === "enroll") {
       navigate(`/courses/enroll` , {state: id});
     } else if (buttonId === "login")  {
-      navigate("/register");
+      navigate("/login");
     } else if (buttonId === "details") {
       navigate(`/courses/view/${id}`, {state: id});
     }

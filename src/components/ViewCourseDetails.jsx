@@ -14,16 +14,22 @@ const CourseDetailsView = () => {
 
   const navigate = useNavigate();
 
-  //TODO: send course object to ViewModuleDetails
-  //TODO: navigate to /:moduleId on button click
-  //TODO: Figure out to appropriately feed the link parameters
+  //Done: send course object to ViewModuleDetails
+  //Done: navigate to /:moduleId on button click
+  //Done: Figure out to appropriately feed the link parameters
     //https://ui.dev/react-router-url-parameters
+
+  const handleClick = () => {
+    navigate("/dashboard/favorites", {state: thisId});
+  }
 
   return (
     <>
         <Navigation />
         <Container>
             <h1>{thisCourse.name}</h1>
+            <Button variant="light" className="mb-5" onClick={handleClick}><img src="/assets/noun-chef-hat.png" height="40px"></img>Add to favorites</Button>
+
             <h2>Description</h2>
             <p>{thisCourse.description}</p>
             {console.log(thisCourse.modules)}

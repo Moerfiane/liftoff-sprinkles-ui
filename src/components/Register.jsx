@@ -1,5 +1,5 @@
 import React from "react";
-import {  useState } from "react";
+import {  useState, useContext } from "react";
 import {
   InputGroup,
   Col,
@@ -12,15 +12,19 @@ import {
 import Navigation from "./Navbar";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { LoginContext } from "../utilities/checkLogin";
 
 //TODO: Add e-mail field
 //TODO: Add e-mail confirmation logic
 //TODO: Add context for conditional rendering of form - should not render if user is logged in
 
 export default function Register() {
+  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+
+  //this line is new
   const [role, setRole] = useState('');
   const navigate = useNavigate();
   const handleRegister = async (event) => {
@@ -36,20 +40,23 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, verifyPassword ,role}),
+        //adds role to body
+        body: JSON.stringify({ username, password, verifyPassword, role}),
       });
 
       const data = await response.json();
       console.log('Response Body:', data);
 
-      
+      //currently returning null for data.userId etc
       if (data.success) {
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("role", data.role);
         if(data.role === 'admin') {
           navigate('/courses/create'); 
+          setIsLoggedIn(true);
         } else  {
           navigate('/courses'); 
+          setIsLoggedIn(true);
         }
 
       } else {
@@ -60,21 +67,9 @@ export default function Register() {
     }
   };
 
-
   return (
     <>
-    <Navbar bg="light" expand="lg">
-      <Container>
-        <Navbar.Brand href="#home">Cooking Buddies</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-<Nav className="ms-auto">
-            <Nav.Link href="/admin">Admin</Nav.Link>
-          
-</Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navigation />
     <Container>
       <Row className="vh-100 d-flex justify-content-center align-items-center">
         <Col md={10} lg={8} xs={12}>
