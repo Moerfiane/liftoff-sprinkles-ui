@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import ProgressBar from './ProgressBar';
 import Navigation from './Navbar';
-import { Container, Col, Card } from 'react-bootstrap';
+import { Container, Col, Card, Button } from 'react-bootstrap';
 import { sendData } from '../utilities/sendData';
+import UserDetails from './UserAccountPage';
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
+    const [editingPassword, setEditingPassword] = useState(false);
     const user = parseInt(localStorage.getItem('userId'));
 
-    const data = {'userId': user};
+    const data = {userId : user};
 
     const getEnrolledCourses = async () => {
-        let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        return response;
+        try {
+            let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
+            return response;
+        } 
+        catch (error) {
+            console.error('Error fetching enrolled courses:', error);
+            throw error;
+        }
     };
 
     const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -29,6 +37,17 @@ const Dashboard = () => {
             });
     }, []);
 
+    const editPassword = () => {
+        setEditingPassword(true);
+      };
+    
+      const updatePassword = () => {
+        setEditingPassword(false);
+      };
+    
+      const cancelPasswordEdit = () => {
+        setEditingPassword(false);
+      };
 
     return (
         <>
@@ -50,10 +69,23 @@ const Dashboard = () => {
                                 <p>You are not currently enrolled in any courses.</p>
                             )
                         )}
+
                         </Card.Body>
                     </Card>
                 </Col>
             </div>
+            </Container>
+            <Container>
+                <div>
+                {!editingPassword && (
+                            <Button variant="primary" onClick={editPassword}>
+                                Edit Password
+                            </Button>
+                        )}
+                        {editingPassword && (
+                            <UserDetails userId={user} onUpdate={updatePassword} onCancel={cancelPasswordEdit} />
+                        )}
+                </div>
             </Container>
         </>
     );
