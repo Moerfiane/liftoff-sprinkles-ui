@@ -57,9 +57,7 @@ function App() {
         }
     
         const data = await response.json();
-        console.log(data);
         setCourses(data);
-        console.log(courses);
       } catch (error) {
         console.error('Error:', error);
       }
