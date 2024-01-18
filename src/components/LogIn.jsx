@@ -19,6 +19,7 @@ export default function LogIn() {
       if (response.data.success) {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("role", response.data.role);
+        setIsLoggedIn(true);
         if(response.data.role === 'admin') {
           navigate('/courses/create'); 
         } else  {
