@@ -10,10 +10,9 @@ const Dashboard = () => {
 
     const data = {'userId': user};
 
-
     const getEnrolledCourses = async () => {
         let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
-        return response.data;
+        return response;
     };
 
     const [enrolledCourses, setEnrolledCourses] = useState([]);
@@ -21,7 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         getEnrolledCourses()
             .then((courses) => {
-                setEnrolledCourses(courses);
+                setEnrolledCourses(courses.enrolledCourses);
                 setLoading(false);
             })
             .catch((error) => {
@@ -45,7 +44,7 @@ const Dashboard = () => {
                         ) : (
                             enrolledCourses.length > 0 ? (
                                 enrolledCourses.map((course) => (
-                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.progress} />
+                                    <ProgressBar key={course.courseName} courseName={course.courseName} progress={course.courseProgress} />
                                 ))
                             ) : (
                                 <p>You are not currently enrolled in any courses.</p>
