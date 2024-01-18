@@ -21,7 +21,7 @@ import EnrollConfirmationPage from './components/EnrollmentConfirmation';
 import { CourseContext } from './utilities/checkCourses';
 import ModuleDetailsView from './components/ViewModuleDetails';
 import FavoriteCoursePage from './components/FavoriteCourse';
-import UnenrollButton from './components/UnenrollConfirmation';
+import UnenrollConfirmationPage from './components/UnenrollConfirmation';
 
 //Done: Build CourseCard component
 //Done: Build Menu component
@@ -86,7 +86,7 @@ function App() {
                 <Route path="/dashboard/favorites" element={<FavoriteCoursePage />} />
               <Route path="/feedback" element={<CourseFeedback />} />
               <Route path="/" element={<LogIn />} />
-              <Route path="/unenroll/:courseId/:userId" element={<UnenrollButton/>} />
+              <Route path="/unenroll/:courseId/:userId" element={<UnenrollConfirmationPage/>} />
             </Routes>
           </Router>
         </CourseContext.Provider>
