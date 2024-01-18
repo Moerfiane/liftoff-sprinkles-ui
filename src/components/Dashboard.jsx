@@ -8,6 +8,7 @@ import UserDetails from './UserAccountPage';
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [editingPassword, setEditingPassword] = useState(false);
+    const [userToDelete, setUserToDelete] = useState(null);
     const user = parseInt(localStorage.getItem('userId'));
 
     const data = {userId : user};
@@ -49,13 +50,30 @@ const Dashboard = () => {
         setEditingPassword(false);
       };
 
+      const confirmDeleteAccount = (userId) => {
+        setUserToDelete(userId);
+      };
+
+      const cancelDeleteAccount = () => {
+        setUserToDelete(null);
+      };
+
+      const handleDeleteAccount = async () => {
+        try {
+            await sendData(`/dashboard/${userToDelete}`, 'DELETE', { 'Content-Type': 'application/json' }, { userId: userToDelete });
+            setUserToDelete(null);
+        } catch (error) {
+            console.error('Error deleting account:', error);
+        }
+      };
+
     return (
         <>
         <Navigation />
             <Container>
             <div>
                 <Col xs={6} md={8} lg={12}>
-                    <Card>
+                    <Card className="mb-4">
                         <Card.Body>
                         <h2 className="fw-bold mb-5 text-uppercase">Currently Enrolled Courses</h2>
                         {loading ? (
@@ -78,15 +96,32 @@ const Dashboard = () => {
             <Container>
                 <div>
                 {!editingPassword && (
-                            <Button variant="primary" onClick={editPassword}>
-                                Edit Password
-                            </Button>
+                    <>
+                        <Button variant="primary" onClick={editPassword}>
+                            Edit Password
+                        </Button>
+                        <Button variant="danger" onClick={() => confirmDeleteAccount(user)}>
+                            Delete Account
+                        </Button>
+                    </>
                         )}
                         {editingPassword && (
                             <UserDetails userId={user} onUpdate={updatePassword} onCancel={cancelPasswordEdit} />
                         )}
                 </div>
             </Container>
+
+            {userToDelete && (
+                <div className="delete-confirmation text-center">
+                    <p>Are you sure you want to delete your account?</p>
+                    <Button variant="danger" onClick={handleDeleteAccount}>
+                    Yes, Delete Account
+                    </Button>
+                    <Button variant="secondary" onClick={cancelDeleteAccount}>
+                    Cancel
+                    </Button>
+                </div>
+            )}
         </>
     );
 };

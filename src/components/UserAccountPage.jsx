@@ -35,6 +35,7 @@ const UserDetails = ({ userId, onUpdate, onCancel }) => {
       <Form.Group controlId="formCurrentPassword">
         <Form.Label>Current Password</Form.Label>
         <Form.Control
+          className="w-auto mb-4"
           type="password"
           placeholder="Enter current password"
           value={currentPassword}
@@ -44,6 +45,7 @@ const UserDetails = ({ userId, onUpdate, onCancel }) => {
       <Form.Group controlId="formNewPassword">
         <Form.Label>New Password</Form.Label>
         <Form.Control
+          className="w-auto mb-4"
           type="password"
           placeholder="Enter new password"
           value={newPassword}
