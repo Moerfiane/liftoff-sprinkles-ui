@@ -21,6 +21,7 @@ const FavoriteCoursePage = () => {
   
   const [show, setShow] = useState(false);
   const [alertBody, setAlertBody] = useState('');
+  //needed to initialize to empty array
   const [courseData, setCourseData] = useState([]);
 
   const data = {
@@ -54,6 +55,9 @@ const FavoriteCoursePage = () => {
   return (
     <>
       <Navigation/>
+      <Container>
+      
+      <h1>My Favorite Courses</h1>
       {!confirmation ? (
         <FavoriteCourseConfirmation handleFavorite={handleFavorite}/>
       ) : ((
@@ -65,6 +69,7 @@ const FavoriteCoursePage = () => {
         return a CourseCard w/ link to Course Data
       */}
 
+    </Container>
     </>
   )
 
