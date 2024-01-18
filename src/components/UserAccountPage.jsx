@@ -1,38 +1,64 @@
-import Navigation from './Navbar';
-import { Button, Container, Table } from 'react-bootstrap';
-function UserDetails() {
+import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { sendData } from '../utilities/sendData';
+
+const UserDetails = ({ userId, onUpdate, onCancel }) => {
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
+  const changeCurrentPassword = (e) => {
+    setCurrentPassword(e.target.value);
+  };
+
+  const changeNewPassword = (e) => {
+    setNewPassword(e.target.value);
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Send a request to update the user's password
+      await sendData(`/dashboard/${userId}/password`, 'PUT', {
+        'Content-Type': 'application/json',
+      }, { currentPassword, newPassword });
+
+      // Notify the parent component about the update
+      onUpdate();
+    } catch (error) {
+      console.error('Error updating password:', error);
+      // Handle error as needed
+    }
+  };
+
   return (
-    <>
-        <Navigation />
-        <Container className="mt-5"> 
-            <Table striped hover>
-            <thead>
-                <tr>
-                <th>Field</th>
-                <th>Value</th>
-                <th>Edit</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>Username</td>
-                <td>myAwesomeUsername</td>
-                <td><Button variant="primary">Edit</Button></td>
-                </tr>
-                <tr>
-                <td>Password</td>
-                <td>**********</td>
-                <td><Button variant="primary">Edit</Button></td>
-                </tr>
-                <tr>
-                <td>E-mail</td>
-                <td>myAwesomeEmail@email.com</td>
-                <td><Button variant="primary">Edit</Button></td>
-                </tr>
-            </tbody>
-            </Table>
-        </Container>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formCurrentPassword">
+        <Form.Label>Current Password</Form.Label>
+        <Form.Control
+          className="w-auto mb-4"
+          type="password"
+          placeholder="Enter current password"
+          value={currentPassword}
+          onChange={changeCurrentPassword}
+        />
+      </Form.Group>
+      <Form.Group controlId="formNewPassword">
+        <Form.Label>New Password</Form.Label>
+        <Form.Control
+          className="w-auto mb-4"
+          type="password"
+          placeholder="Enter new password"
+          value={newPassword}
+          onChange={changeNewPassword}
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Save Changes
+      </Button>
+      <Button variant="secondary" onClick={onCancel}>
+        Cancel
+      </Button>
+    </Form>
   );
-}
+};
 export default UserDetails;

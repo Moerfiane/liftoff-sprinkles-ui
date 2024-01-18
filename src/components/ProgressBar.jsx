@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProgressBar = ({ key, courseName, progress}) => {
+const ProgressBar = ({ courseName, progress}) => {
 
     console.log(progress);
     console.log(courseName);
