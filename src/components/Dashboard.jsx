@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ProgressBar from './ProgressBar';
 import Navigation from './Navbar';
 import { Container, Col, Card, Button } from 'react-bootstrap';
 import { sendData } from '../utilities/sendData';
 import UserDetails from './UserAccountPage';
+import DeleteUser from './DeleteUser';
+import { LoginContext } from "../utilities/checkLogin";
+import { Link, useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const [editingPassword, setEditingPassword] = useState(false);
     const [userToDelete, setUserToDelete] = useState(null);
     const user = parseInt(localStorage.getItem('userId'));
+    const {isLoggedIn, setIsLoggedIn} = useContext(LoginContext);
+    const navigate = useNavigate();
 
     const data = {userId : user};
 
@@ -58,14 +63,23 @@ const Dashboard = () => {
         setUserToDelete(null);
       };
 
-      const handleDeleteAccount = async () => {
-        try {
-            await sendData(`/dashboard/${userToDelete}`, 'DELETE', { 'Content-Type': 'application/json' }, { userId: userToDelete });
-            setUserToDelete(null);
-        } catch (error) {
-            console.error('Error deleting account:', error);
-        }
-      };
+    //   const handleDeleteAccount = async () => {
+    //     try {
+    //         await sendData(`/dashboard/${userId}/delete`, 'DELETE', { 'Content-Type': 'application/json' });
+    //         setUserToDelete(null);
+    //     } catch (error) {
+    //         console.error('Error deleting account:', error);
+    //     }
+    //   };
+    //   const handleDeleteAccount = () => {
+
+        // setUserToDelete(null);
+        // localStorage.removeItem("userId");
+        // localStorage.removeItem("role");
+    //     setIsLoggedIn(false);
+    //     navigate('/login');
+    //   };
+      
 
     return (
         <>
@@ -108,20 +122,24 @@ const Dashboard = () => {
                         {editingPassword && (
                             <UserDetails userId={user} onUpdate={updatePassword} onCancel={cancelPasswordEdit} />
                         )}
-                </div>
-            </Container>
+
 
             {userToDelete && (
-                <div className="delete-confirmation text-center">
-                    <p>Are you sure you want to delete your account?</p>
-                    <Button variant="danger" onClick={handleDeleteAccount}>
-                    Yes, Delete Account
-                    </Button>
-                    <Button variant="secondary" onClick={cancelDeleteAccount}>
-                    Cancel
-                    </Button>
-                </div>
+                <DeleteUser userId={userToDelete} onCancel={cancelDeleteAccount} onAccountDeleted={DeleteUser.handleDeleteAccount} />
+                
+                
+                // <div className="delete-confirmation text-center">
+                //     <p>Are you sure you want to delete your account?</p>
+                //     <Button variant="danger" onClick={handleDeleteAccount}>
+                //     Yes, Delete Account
+                //     </Button>
+                //     <Button variant="secondary" onClick={cancelDeleteAccount}>
+                //     Cancel
+                //     </Button>
+                // </div>
             )}
+                            </div>
+            </Container>
         </>
     );
 };
