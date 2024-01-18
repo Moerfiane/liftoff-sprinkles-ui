@@ -12,6 +12,7 @@ const sendData = async (path, method, headers, body) => {
 
       if (data.success) {
         console.log(data.message);
+        console.log(data);
         return data;
       } else {
         console.error('Failed to send data' + data.message);
