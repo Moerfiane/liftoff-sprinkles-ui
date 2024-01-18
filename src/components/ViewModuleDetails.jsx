@@ -4,6 +4,7 @@ import { useEffect, state, useState } from "react";
 import { CourseContext } from "../utilities/checkCourses";
 import Navigation from "./Navbar";
 import { sendData } from "../utilities/sendData";
+import FeedbackForm from "./CourseFeedback";
 
 
 
@@ -56,6 +57,9 @@ const ModuleDetailsView = () => {
                 <p>{thisModule.tools}</p>
                 <p>{thisModule.notes}</p>
                 <Button onClick={completeModule}>Done!</Button>
+            </Container>
+            <Container>
+              <FeedbackForm/>
             </Container>
         </>
     )
