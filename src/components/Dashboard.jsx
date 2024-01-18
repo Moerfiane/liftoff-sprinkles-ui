@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     const getEnrolledCourses = async () => {
         try {
-            let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );
+            let response = await sendData('/dashboard', 'POST', {'Content-Type': 'application/json'}, data );  
             return response;
         } 
         catch (error) {
@@ -110,19 +110,20 @@ const Dashboard = () => {
             </Container>
             <Container>
                 <div>
-                {!editingPassword && (
-                    <>
-                        <Button variant="primary" onClick={editPassword}>
-                            Edit Password
-                        </Button>
-                        <Button variant="danger" onClick={() => confirmDeleteAccount(user)}>
+                    {!editingPassword && (
+                        <>
+                            <Button variant="primary" onClick={editPassword}>
+                                Edit Password
+                            </Button>
+                            {/* <Button variant="danger" onClick={() => confirmDeleteAccount(user)}>
                             Delete Account
-                        </Button>
-                    </>
-                        )}
-                        {editingPassword && (
-                            <UserDetails userId={user} onUpdate={updatePassword} onCancel={cancelPasswordEdit} />
-                        )}
+                        </Button> */}
+
+                        </>
+                    )}
+                    {editingPassword && (
+                        <UserDetails userId={user} onUpdate={updatePassword} onCancel={cancelPasswordEdit} />
+                    )}
 
 
             {userToDelete && (
