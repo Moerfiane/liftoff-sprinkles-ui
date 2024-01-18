@@ -21,6 +21,7 @@ export default function Register() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [verifyPassword, setVerifyPassword] = useState('');
+  //this line is new
   const [role, setRole] = useState('');
   const navigate = useNavigate();
   const handleRegister = async (event) => {
@@ -36,13 +37,14 @@ export default function Register() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, verifyPassword ,role}),
+        //adds role to body
+        body: JSON.stringify({ username, password, verifyPassword, role}),
       });
 
       const data = await response.json();
       console.log('Response Body:', data);
 
-      
+      //currently returning null for data.userId etc
       if (data.success) {
         localStorage.setItem("userId", data.userId);
         localStorage.setItem("role", data.role);
@@ -59,7 +61,6 @@ export default function Register() {
       console.log(error);
     }
   };
-
 
   return (
     <>

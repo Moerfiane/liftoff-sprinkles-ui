@@ -16,11 +16,14 @@ export default function LogIn() {
     event.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:8080/login', { username, password });
+      console.log(response);
+      //added nested if statement to navigate
       if (response.data.success) {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("role", response.data.role);
         if(response.data.role === 'admin') {
           navigate('/courses/create'); 
+          setIsLoggedIn(true);
         } else  {
           navigate('/courses'); 
         }
