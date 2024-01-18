@@ -27,7 +27,6 @@ export default function CreateModule() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(moduleData);
         setModuleData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -44,8 +43,6 @@ export default function CreateModule() {
             updateApp();
             navigate("/courses");
         }
-
-        console.log(moduleData);
 
         sendData('/courses/modules/create', 'POST', {'Content-Type': 'application/json'}, moduleData);
     };

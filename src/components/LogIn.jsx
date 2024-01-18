@@ -16,15 +16,17 @@ export default function LogIn() {
     event.preventDefault(); 
     try {
       const response = await axios.post('http://localhost:8080/login', { username, password });
-      console.log('Response:', response);
       if (response.data.success) {
         localStorage.setItem("userId", response.data.userId);
         localStorage.setItem("role", response.data.role);
-        navigate("/courses");
-        setIsLoggedIn(true);
-        console.log(`isLoggedIn: ${isLoggedIn}`);
+        if(response.data.role === 'admin') {
+          navigate('/courses/create'); 
+        } else  {
+          navigate('/courses'); 
+        }
+
       } else {
-        alert('Login failed: ' + response.data.message); 
+        alert(response.data.message); 
       }
     } catch (error) {
       console.error('Login error:', error);
