@@ -1,12 +1,32 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Col } from 'react-bootstrap';
+import React, { useEffect,useState } from 'react';
+import { Form, Button, Container, Col, Card, ListGroup } from 'react-bootstrap';
 
 export default function FeedbackForm() {
     const [name, setName] = useState('');
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState('');
     const [errors, setErrors] = useState({});
+    const [feedbackList, setFeedbackList] = useState([]);
+    const [isFetched, setIsFetched] = useState(false);
 
+    useEffect(() => {
+      if (!isFetched) {
+        fetchFeedback();
+        setIsFetched(true);
+      }
+    }, [isFetched]);
+    
+    
+    const fetchFeedback = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/feedback');
+        const data = await response.json();
+        setFeedbackList(data);
+      } catch (error) {
+        console.error('Error fetching feedback:', error);
+      }
+    };
+    
     const handleSubmit = async (event) => {
       event.preventDefault();
       let newErrors = {};
@@ -19,7 +39,8 @@ export default function FeedbackForm() {
       if (Object.keys(newErrors).length === 0) {
           console.log('Feedback Submitted:', { name, comment, rating });
           try {
-            const response = await fetch('http://localhost:8080/review', {
+
+            const response = await fetch('http://localhost:8080/feedback', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -30,7 +51,11 @@ export default function FeedbackForm() {
             const data = await response.json();
             console.log('Response Body:', data);
             
-            if (data.success) {
+            if (data.id) {
+              // Refresh the feedback list
+              setIsFetched(false);
+              fetchFeedback(); 
+
               alert('Thank you for your feedback!');
             } else {
             }
@@ -52,7 +77,7 @@ export default function FeedbackForm() {
 
     return (
         <Container className="mt-5">
-            <h2>Feedback Form</h2>
+            <h4>Feedback</h4>
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
@@ -105,10 +130,21 @@ export default function FeedbackForm() {
                     </Form.Group>
                 </Col>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit"  className='mb-5'>
                     Submit Feedback
                 </Button>
             </Form>
+            {[...feedbackList].reverse().map((feedback, index) => (
+              <Card key={index} className="mb-3">
+                <Card.Body>
+                  <Card.Title>Feedback from {feedback.name}</Card.Title>
+                  <ListGroup variant="flush">
+                    <ListGroup.Item><strong>Comment:</strong> {feedback.comment}</ListGroup.Item>
+                    <ListGroup.Item><strong>Rating:</strong> {feedback.rating}</ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+            ))}
         </Container>
     );
 }
