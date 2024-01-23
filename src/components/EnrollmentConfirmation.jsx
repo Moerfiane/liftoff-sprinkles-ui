@@ -10,7 +10,6 @@ const EnrollConfirmationPage = () => {
   const course = location.state;
   const user = localStorage.getItem('userId');
 
-
   const [show, setShow] = useState(false);
   const [alertBody, setAlertBody] = useState('');
 
